@@ -4,7 +4,8 @@ import Product from "./pages/Product";
 import ShoppingCart from "./pages/ShoppingCart";
 import ProductList from "./pages/ProductList";
 import { Page404 } from "./pages/Page404";
-import Home from "./pages/Home";
+import Home from "./pages/HomeScreen";
+
 
 export const RouteList: React.FC = () => {
   return useRoutes([

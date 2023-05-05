@@ -6,6 +6,7 @@ import {
 } from "@mui/material/styles";
 import { BrowserRouter } from "react-router-dom";
 import { RouteList } from "./routes";
+import Cart from "./components/Cart";
 
 export const App = (): JSX.Element => {
   const theme = createTheme({
@@ -20,6 +21,7 @@ export const App = (): JSX.Element => {
         <CssBaseline />
         <BrowserRouter>
           <RouteList />
+          <Cart/>
         </BrowserRouter>
       </ThemeProvider>
     </StyledEngineProvider>

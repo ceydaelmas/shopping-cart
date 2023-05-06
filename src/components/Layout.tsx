@@ -21,13 +21,17 @@ import { alpha } from "@mui/material/styles";
 import InputBase from "@mui/material/InputBase";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
-
+import Badge from "@mui/material/Badge/Badge";
 import SearchIcon from "@mui/icons-material/Search";
 import { useState } from "react";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import StyledProfileMenu from "./StyledProfileMenu";
+import PermIdentityIcon from "@mui/icons-material/PermIdentity";
+import PersonIcon from "@mui/icons-material/Person";
 
-import AccountCircle from "@mui/icons-material/AccountCircle";
+import { Typography } from "@mui/material";
+
 import CartContext from "../context/cart/CartContext";
 import { useContext } from "react";
 import "./ProductCard.css";
@@ -127,82 +131,7 @@ export default function DashboardLayout() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
     React.useState<null | HTMLElement>(null);
-
-  const isMenuOpen = Boolean(anchorEl);
-  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-
   const { cartItems, showHideCart, showCart } = useContext(CartContext);
-
-  const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleMobileMenuClose = () => {
-    setMobileMoreAnchorEl(null);
-  };
-
-  const handleMenuClose = () => {
-    setAnchorEl(null);
-    handleMobileMenuClose();
-  };
-
-  const handleMouseLeave = () => {
-    showHideCart(false);
-  };
-  const menuId = "primary-search-account-menu";
-  const renderMenu = (
-    <Menu
-      anchorEl={anchorEl}
-      anchorOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      id={menuId}
-      keepMounted
-      transformOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      open={isMenuOpen}
-      onClose={handleMenuClose}
-    >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-    </Menu>
-  );
-
-  const mobileMenuId = "primary-search-account-menu-mobile";
-  const renderMobileMenu = (
-    <Menu
-      anchorEl={mobileMoreAnchorEl}
-      anchorOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      id={mobileMenuId}
-      keepMounted
-      transformOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      open={isMobileMenuOpen}
-      onClose={handleMobileMenuClose}
-    >
-      <MenuItem onClick={handleProfileMenuOpen}>
-        <IconButton
-          size="large"
-          aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
-          color="inherit"
-        >
-          <AccountCircle />
-        </IconButton>
-        <p>Profile</p>
-      </MenuItem>
-    </Menu>
-  );
-
   const theme = useTheme();
   const [open, setOpen] = React.useState(true);
   const [selectedIndex, setSelectedIndex] = React.useState(-1);
@@ -249,80 +178,77 @@ export default function DashboardLayout() {
 
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
-            {/* <IconButton
-              size="large"
-              color="inherit"
-              component={Link}
-              to="/basket"
-            > */}
-            {/* <Badge badgeContent={5} color="success">
-              <ShoppingBasketIcon />
-            </Badge> */}
-            {/* </IconButton> */}
-
-            <div className="nav__right">
-              <Link
-                to="/shopping-cart"
-                style={{
-                  fontWeight: showCart ? "bold" : "normal",
-                  cursor: "pointer",
-                  textDecoration: "none", // Link stilini kullanmak için textDecoration'ı none yapın
-                  color: "inherit", // Link'in üstüne gelince mavi renk vermesini önlemek için color'ı inherit yapın
-                }}
-              >
-                <div className="cart__icon" onMouseEnter={showHideCart}>
-                  {showCart ? (
-                    <ShoppingCartIcon
-                      aria-label="Sepet"
-                      sx={{
-                        fontSize: 28,
-                        cursor: "pointer",
-                        transition: "color 0.5s",
-                      }}
-                    />
-                  ) : (
-                    <ShoppingCartOutlinedIcon
-                      aria-label="Sepet"
-                      sx={{
-                        fontSize: 28,
-                        cursor: "pointer",
-                      }}
-                    />
-                  )}
-
-                  <div className="cart__text">
-                    <span
-                      style={{
-                        fontWeight: showCart ? "bold" : "normal",
-                        cursor: "pointer",
-                      }}
-                    >
-                      Sepetim
-                    </span>
-                    {cartItems.length > 0 && (
-                      <div className="item__count">
-                        <span>{cartItems.length}</span>
-                      </div>
-                    )}
-                  </div>
-                </div>
-              </Link>
-            </div>
-
-            <IconButton
-              size="large"
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
-              color="inherit"
+            <StyledProfileMenu/>
+            <Typography
+              component="span"
+              variant="subtitle1"
+              fontWeight={"normal"}
+              sx={{
+                cursor: "pointer",
+                marginLeft: "0.2rem",
+                marginRight: "0.8rem",
+                verticalAlign: "middle",
+              }}
             >
-              <AccountCircle />
-            </IconButton>
+              Profilim
+            </Typography>
+            <Link
+              to="/shopping-cart"
+              style={{
+                fontWeight: showCart ? "bold" : "normal",
+                cursor: "pointer",
+                textDecoration: "none",
+                color: "inherit",
+              }}
+              onClick={() => {
+                if (showCart) {
+                  showHideCart();
+                }
+              }}
+            >
+              <div onMouseEnter={showHideCart}>
+                {showCart ? (
+                  <ShoppingCartIcon
+                    onMouseEnter={showHideCart}
+                    aria-label="Sepet"
+                    sx={{
+                      fontSize: 28,
+                      cursor: "pointer",
+                      transition: "color 0.5s",
+                      display: "inline-block",
+                      verticalAlign: "middle",
+                    }}
+                  />
+                ) : (
+                  <ShoppingCartOutlinedIcon
+                    aria-label="Sepet"
+                    sx={{
+                      fontSize: 28,
+                      cursor: "pointer",
+                      verticalAlign: "middle",
+                    }}
+                  />
+                )}
+                <Typography
+                  component="span"
+                  variant="subtitle1"
+                  fontWeight={showCart ? "bold" : "normal"}
+                  sx={{
+                    cursor: "pointer",
+                    marginLeft: "0.2rem",
+                    marginRight: "0.8rem",
+                    verticalAlign: "middle",
+                  }}
+                >
+                  Sepetim
+                </Typography>
+                <Badge badgeContent={cartItems.length} color="error"></Badge>
+              </div>
+            </Link>
           </Box>
         </Toolbar>
       </AppBar>
+
       <Drawer
         sx={{
           width: drawerWidth,
@@ -371,8 +297,6 @@ export default function DashboardLayout() {
           </ListItemButton>
         </List>
       </Drawer>
-      {renderMobileMenu}
-      {renderMenu}
       <Main open={open}>
         <DrawerHeader />
         <Outlet />

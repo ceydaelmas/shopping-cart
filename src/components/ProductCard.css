@@ -42,6 +42,24 @@
   outline: none;
 }
 
+.nav__right {
+  flex: 1;
+}
+
+.cart__icon {
+  margin-top: 15px;
+  position: relative;
+  width: max-content;
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cart__icon i {
+  cursor: pointer;
+}
+
 .item__count {
   position: absolute;
   display: grid;
@@ -55,18 +73,7 @@
   top: -50%;
   right: -50%;
 }
-.cart__icon {
-  position: relative;
-  width: max-content;
-  margin-left: auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 
-.cart__icon i {
-  cursor: pointer;
-}
 @media screen and (max-width: 1147px) {
   .productCard__wrapper {
     width: 45%;

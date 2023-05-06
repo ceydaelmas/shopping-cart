@@ -1,13 +1,13 @@
 import { Typography } from "@mui/material";
 
-function ProductList() {
+const ShoppingCart = () => {
   return (
     <>
       <Typography variant="h4" gutterBottom>
-        Product List
+        Shopping Cart
       </Typography>
     </>
   );
-}
+};
 
-export default ProductList;
+export default ShoppingCart;

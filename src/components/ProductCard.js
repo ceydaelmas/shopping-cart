@@ -3,6 +3,7 @@ import "./ProductCard.css";
 import formatCurrency from "format-currency";
 import Rating from "./Rating";
 import CartContext from "../context/cart/CartContext";
+import { Link } from "react-router-dom";
 
 const ProductCard = ({ product }) => {
   const { addToCart } = useContext(CartContext);
@@ -10,8 +11,20 @@ const ProductCard = ({ product }) => {
   return (
     <div className="productCard__wrapper">
       <div>
-        <img className="productCard__img" src={product.image} alt="" />
-        <h4>{product.name}</h4>
+        <Link
+          to={{
+            pathname: `/products/${product._id}`,
+            state: { product: product },
+          }}
+          style={{
+            cursor: "pointer",
+            textDecoration: "none",
+            color: "inherit",
+          }}
+        >
+          <img className="productCard__img" src={product.image} alt="" />
+          <h4 style={{ display: "inline-block" }}>{product.name}</h4>
+        </Link>
         <div className="ProductCard__price">
           <h5>{formatCurrency(`${product.price}`, opts)}</h5>
         </div>

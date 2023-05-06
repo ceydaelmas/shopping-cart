@@ -21,7 +21,12 @@ import { alpha } from "@mui/material/styles";
 import InputBase from "@mui/material/InputBase";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
+
 import SearchIcon from "@mui/icons-material/Search";
+import { useState } from "react";
+import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import CartContext from "../context/cart/CartContext";
 import { useContext } from "react";
@@ -126,7 +131,7 @@ export default function DashboardLayout() {
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
-  const { cartItems, showHideCart } = useContext(CartContext);
+  const { cartItems, showHideCart, showCart } = useContext(CartContext);
 
   const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -141,6 +146,9 @@ export default function DashboardLayout() {
     handleMobileMenuClose();
   };
 
+  const handleMouseLeave = () => {
+    showHideCart(false);
+  };
   const menuId = "primary-search-account-menu";
   const renderMenu = (
     <Menu
@@ -226,7 +234,7 @@ export default function DashboardLayout() {
             <MenuIcon />
           </IconButton>
           <ListItemButton component={Link} to="/">
-            <ListItemText primary={"Shopping Cart"} />
+            <ListItemText primary={"Tomi"} />
           </ListItemButton>
 
           <Search>
@@ -253,18 +261,52 @@ export default function DashboardLayout() {
             {/* </IconButton> */}
 
             <div className="nav__right">
-              <div className="cart__icon">
-                <i
-                  className="fa fa-shopping-cart"
-                  aria-hidden="true"
-                  onClick={showHideCart}
-                />
-                {cartItems.length > 0 && (
-                  <div className="item__count">
-                    <span>{cartItems.length}</span>
+              <Link
+                to="/shopping-cart"
+                style={{
+                  fontWeight: showCart ? "bold" : "normal",
+                  cursor: "pointer",
+                  textDecoration: "none", // Link stilini kullanmak için textDecoration'ı none yapın
+                  color: "inherit", // Link'in üstüne gelince mavi renk vermesini önlemek için color'ı inherit yapın
+                }}
+              >
+                <div className="cart__icon" onMouseEnter={showHideCart}>
+                  {showCart ? (
+                    <ShoppingCartIcon
+                      aria-label="Sepet"
+                      sx={{
+                        fontSize: 28,
+                        cursor: "pointer",
+                        transition: "color 0.5s",
+                      }}
+                    />
+                  ) : (
+                    <ShoppingCartOutlinedIcon
+                      aria-label="Sepet"
+                      sx={{
+                        fontSize: 28,
+                        cursor: "pointer",
+                      }}
+                    />
+                  )}
+
+                  <div className="cart__text">
+                    <span
+                      style={{
+                        fontWeight: showCart ? "bold" : "normal",
+                        cursor: "pointer",
+                      }}
+                    >
+                      Sepetim
+                    </span>
+                    {cartItems.length > 0 && (
+                      <div className="item__count">
+                        <span>{cartItems.length}</span>
+                      </div>
+                    )}
                   </div>
-                )}
-              </div>
+                </div>
+              </Link>
             </div>
 
             <IconButton

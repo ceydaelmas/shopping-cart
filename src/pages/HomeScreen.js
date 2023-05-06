@@ -1,14 +1,12 @@
-import products from "../data";
-import "./HomeScreen.css";
-import ProductCard from "../components/ProductCard";
+import { Typography } from "@mui/material";
 
 const HomeScreen = () => {
   return (
-    <div className="products_wrapper">
-      {products.map((product) => (
-        <ProductCard key={product.id} product={product} />
-      ))}
-    </div>
+    <>
+      <Typography variant="h4" gutterBottom>
+        Home
+      </Typography>
+    </>
   );
 };
 

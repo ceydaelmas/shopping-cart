@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@emotion/react": "^11.10.6",
-    "@emotion/styled": "^11.10.6",
+    "@emotion/react": "^11.11.0",
+    "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.11.16",
-    "@mui/material": "^5.12.2",
+    "@mui/material": "^5.12.3",
     "@types/jest": "^27.5.2",
     "@types/node": "^16.18.24",
     "@types/react": "^18.2.0",

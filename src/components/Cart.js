@@ -11,16 +11,16 @@ const Cart = () => {
   return (
     <>
       {showCart && (
-        <div className='cart__wrapper'>
+        <div className="cart__wrapper">
           <div style={{ textAlign: "right" }}>
             <i
               style={{ cursor: "pointer" }}
-              className='fa fa-times-circle'
-              aria-hidden='true'
+              className="fa fa-times-circle"
+              aria-hidden="true"
               onClick={showHideCart}
             ></i>
           </div>
-          <div className='cart__innerWrapper'>
+          <div className="cart__innerWrapper">
             {cartItems.length === 0 ? (
               <h4>Cart is Empty</h4>
             ) : (
@@ -31,7 +31,7 @@ const Cart = () => {
               </ul>
             )}
           </div>
-          <div className='Cart__cartTotal'>
+          <div className="Cart__cartTotal">
             <div>Cart Total</div>
             <div></div>
             <div style={{ marginLeft: 5 }}>

@@ -29,6 +29,7 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import StyledProfileMenu from "./StyledProfileMenu";
 import PermIdentityIcon from "@mui/icons-material/PermIdentity";
 import PersonIcon from "@mui/icons-material/Person";
+import CartMenu from "./CartMenu";
 
 import { Typography } from "@mui/material";
 
@@ -178,73 +179,11 @@ export default function DashboardLayout() {
 
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
-            <StyledProfileMenu/>
-            <Typography
-              component="span"
-              variant="subtitle1"
-              fontWeight={"normal"}
-              sx={{
-                cursor: "pointer",
-                marginLeft: "0.2rem",
-                marginRight: "0.8rem",
-                verticalAlign: "middle",
-              }}
-            >
-              Profilim
-            </Typography>
-            <Link
-              to="/shopping-cart"
-              style={{
-                fontWeight: showCart ? "bold" : "normal",
-                cursor: "pointer",
-                textDecoration: "none",
-                color: "inherit",
-              }}
-              onClick={() => {
-                if (showCart) {
-                  showHideCart();
-                }
-              }}
-            >
-              <div onMouseEnter={showHideCart}>
-                {showCart ? (
-                  <ShoppingCartIcon
-                    onMouseEnter={showHideCart}
-                    aria-label="Sepet"
-                    sx={{
-                      fontSize: 28,
-                      cursor: "pointer",
-                      transition: "color 0.5s",
-                      display: "inline-block",
-                      verticalAlign: "middle",
-                    }}
-                  />
-                ) : (
-                  <ShoppingCartOutlinedIcon
-                    aria-label="Sepet"
-                    sx={{
-                      fontSize: 28,
-                      cursor: "pointer",
-                      verticalAlign: "middle",
-                    }}
-                  />
-                )}
-                <Typography
-                  component="span"
-                  variant="subtitle1"
-                  fontWeight={showCart ? "bold" : "normal"}
-                  sx={{
-                    cursor: "pointer",
-                    marginLeft: "0.2rem",
-                    marginRight: "0.8rem",
-                    verticalAlign: "middle",
-                  }}
-                >
-                  Sepetim
-                </Typography>
-                <Badge badgeContent={cartItems.length} color="error"></Badge>
-              </div>
-            </Link>
+            <StyledProfileMenu />
+            <Badge badgeContent={cartItems.length} color="error">
+              {" "}
+              <CartMenu />
+            </Badge>
           </Box>
         </Toolbar>
       </AppBar>

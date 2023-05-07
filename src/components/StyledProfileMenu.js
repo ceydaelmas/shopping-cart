@@ -5,10 +5,12 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import EditIcon from "@mui/icons-material/Edit";
 import Divider from "@mui/material/Divider";
-import ArchiveIcon from "@mui/icons-material/Archive";
-import FileCopyIcon from "@mui/icons-material/FileCopy";
+import DiscountOutlinedIcon from "@mui/icons-material/DiscountOutlined";
+import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
+import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import { Typography } from "@mui/material";
 
 const StyledMenu = styled((props) => (
   <Menu
@@ -27,19 +29,20 @@ const StyledMenu = styled((props) => (
   "& .MuiPaper-root": {
     borderRadius: 6,
     marginTop: theme.spacing(0.5),
-    minWidth: 180, 
+    minWidth: 180,
     color:
       theme.palette.mode === "light"
         ? "rgb(55, 65, 81)"
         : theme.palette.grey[300],
-    padding: '0px 18px',
+    padding: "0px 0px",
     boxShadow:
       "rgb(255, 255, 255) 0px 0px 0px 0px, rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px",
     "& .MuiMenu-list": {
-      padding: 0,
+      padding: "0px 0px",
     },
     "& .MuiMenuItem-root": {
-      padding: "2px 16px", // padding özelliği değiştirildi
+      padding: "4px 16px", // padding özelliği değiştirildi
+      height: 35,
       "& .MuiSvgIcon-root": {
         fontSize: 18,
         color: theme.palette.text.secondary,
@@ -75,7 +78,12 @@ export default function StyledProfileMenu() {
         variant="contained"
         disableElevation
         onClick={handleClick}
-        endIcon={<KeyboardArrowDownIcon />}
+        startIcon={<PersonOutlineOutlinedIcon sx={{ fontSize: 'large' }} />}
+        sx={{
+          color: "white",
+          backgroundColor: "primary.main",
+          textTransform: "none",
+        }}
       >
         Profilim
       </Button>
@@ -88,22 +96,22 @@ export default function StyledProfileMenu() {
         open={open}
         onClose={handleClose}
       >
-        <MenuItem onClick={handleClose} disableRipple>
-          <EditIcon />
-          Edit
-        </MenuItem>
-        <MenuItem onClick={handleClose} disableRipple>
-          <FileCopyIcon />
-          Duplicate
-        </MenuItem>
+        <Typography variant="span" gutterBottom>
+          <div style={{ padding: "4px 16px" }}>Ceyda Elmas</div>
+        </Typography>
         <Divider sx={{ my: 0.5 }} />
         <MenuItem onClick={handleClose} disableRipple>
-          <ArchiveIcon />
-          Archive
+          <DiscountOutlinedIcon />
+          İndirim Kuponlarım
+        </MenuItem>
+
+        <MenuItem onClick={handleClose} disableRipple>
+          <PersonOutlineOutlinedIcon />
+          Kullanıcı Bilgilerim
         </MenuItem>
         <MenuItem onClick={handleClose} disableRipple>
-          <MoreHorizIcon />
-          More
+          <LogoutOutlinedIcon />
+          Çıkış yap
         </MenuItem>
       </StyledMenu>
     </div>

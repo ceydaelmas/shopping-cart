@@ -21,7 +21,7 @@ export const App = (): JSX.Element => {
         <CssBaseline />
         <BrowserRouter>
           <RouteList />
-          <Cart/>
+          <Cart />
         </BrowserRouter>
       </ThemeProvider>
     </StyledEngineProvider>

@@ -20,7 +20,7 @@ const AuthScreen = () => {
       alignItems={"center"}
       justifyContent={"center"}
       margin={"auto"}
-      marginTop={6}
+      marginTop={0}
       borderRadius={4}
       boxShadow={"2px 2px 10px #ccc"}
       sx={{ ":hover": { boxShadow: "3px 3px 11px #ccc" } }}
@@ -54,7 +54,7 @@ const AuthScreen = () => {
               textAlign: "center",
             }}
           >
-            {isLoginForm ? "Giriş Yap" : "Kayıt Ol"}
+            {isLoginForm ? "Giriş Yap" : "Üye Ol"}
           </Typography>
           <div
             style={{ width: "30%", height: "2px", backgroundColor: "#ccc" }}

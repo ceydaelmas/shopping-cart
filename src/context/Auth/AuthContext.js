@@ -37,6 +37,7 @@ export const AuthProvider = ({ children }) => {
       );
 
       if (!response.ok) {
+        setSucceeded(false);
         throw new Error("Registration failed.");
       }
       const data = await response.json();

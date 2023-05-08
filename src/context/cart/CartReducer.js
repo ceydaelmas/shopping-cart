@@ -1,4 +1,9 @@
-import { SHOW_HIDE_CART, ADD_TO_CART, REMOVE_ITEM } from "../Types";
+import {
+  SHOW_HIDE_CART,
+  ADD_TO_CART,
+  REMOVE_ITEM,
+  DECREASE_ITEM,
+} from "../Types";
 
 const CartReducer = (state, action) => {
   switch (action.type) {
@@ -47,6 +52,33 @@ const CartReducer = (state, action) => {
           (item) => item._id !== action.payload
         ),
       };
+    }
+
+    case DECREASE_ITEM: {
+      const existingCartItemIndex = state.cartItems.findIndex(
+        (item) => item._id === action.payload
+      );
+
+      if (existingCartItemIndex !== -1) {
+        const updatedCartItems = [...state.cartItems];
+        const currentQuantity =
+          updatedCartItems[existingCartItemIndex].quantity;
+
+        if (currentQuantity > 1) {
+          updatedCartItems[existingCartItemIndex] = {
+            ...updatedCartItems[existingCartItemIndex],
+            quantity: currentQuantity - 1,
+          };
+        } else {
+          updatedCartItems.splice(existingCartItemIndex, 1);
+        }
+
+        return {
+          ...state,
+          cartItems: updatedCartItems,
+        };
+      }
+      return state;
     }
 
     default:

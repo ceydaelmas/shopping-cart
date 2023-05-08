@@ -1,5 +1,6 @@
 import * as React from "react";
 import { useTheme } from "@mui/material/styles";
+import { useMediaQuery } from "@mui/material";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -9,13 +10,14 @@ import formatCurrency from "format-currency";
 import CartContext from "../context/cart/CartContext";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import IconButton from "@mui/material/IconButton";
-import { CardActionArea } from '@mui/material';
+import { CardActionArea } from "@mui/material";
 
 import GroupedButtons from "./GroupedButtons";
 import { useContext } from "react";
 
 export default function ShoppingCardDetail() {
   const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const { quantity, cartItems, removeItem } = useContext(CartContext);
   let opts = { format: "%s%v", symbol: "€" };
   return (
@@ -24,18 +26,21 @@ export default function ShoppingCardDetail() {
         <Card
           sx={{
             display: "flex",
+            flexDirection: isMobile ? "column" : "row",
             marginBottom: "20px",
             boxShadow: "0px 0px 2px 1px rgba(0,0,0,0.1)",
             borderRadius: "8px",
             overflow: "hidden",
-            width: 930,
-            height: 130,
+            width: isMobile ? "100%" : 930,
+            height: isMobile ? "auto" : 130,
           }}
         >
-          
           <CardMedia
             component="img"
-            sx={{ width: 130, height: 130 }}
+            sx={{
+              width: isMobile ? "100%" : 130,
+              height: isMobile ? 200 : 130,
+            }}
             image={item.image}
             alt="image"
           />
@@ -75,12 +80,12 @@ export default function ShoppingCardDetail() {
               display: "flex",
               alignItems: "center",
               pl: 1,
-              pb: 1,
+              pb: isMobile ? 2 : 1,
               justifyContent: "center",
               paddingLeft: 10,
             }}
           >
-            <GroupedButtons />
+            <GroupedButtons id={item._id} />
           </Box>
 
           <Box
@@ -88,7 +93,7 @@ export default function ShoppingCardDetail() {
               display: "flex",
               alignItems: "center",
               pl: 1,
-              pb: 1,
+              pb: isMobile ? 2 : 1,
               justifyContent: "center",
               paddingLeft: 10,
             }}
@@ -102,13 +107,12 @@ export default function ShoppingCardDetail() {
               {formatCurrency(`${item.price}`, opts)}
             </Typography>
           </Box>
-
           <Box
             sx={{
               display: "flex",
               alignItems: "center",
               pl: 1,
-              pb: 1,
+              pb: isMobile ? 2 : 1,
               justifyContent: "center",
               paddingLeft: 10,
             }}

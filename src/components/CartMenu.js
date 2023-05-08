@@ -65,10 +65,10 @@ const StyledMenu = styled((props) => (
 
 export default function CartMenu() {
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const { quantity, cartItems, removeItem } = useContext(CartContext);
+  const { cartItems, removeItem, getTotalItemCount } = useContext(CartContext);
 
   const open = Boolean(anchorEl);
-  let opts = { format: "%s%v", symbol: "€" };
+  let opts = { format: "%v %s", symbol: "TL" };
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -108,7 +108,7 @@ export default function CartMenu() {
         <Typography variant="span" gutterBottom>
           {cartItems.length !== 0 ? (
             <div style={{ padding: "6px 16px 20px" }}>
-              Sepetim ({cartItems.length} ürün)
+              Sepetim ({getTotalItemCount(cartItems)} ürün)
             </div>
           ) : (
             <div style={{ padding: "8px 16px 16px", textAlign: "center" }}>
@@ -131,9 +131,13 @@ export default function CartMenu() {
                 <ListItemAvatar>
                   <Avatar src={item.image} />
                 </ListItemAvatar>
+
                 <ListItemText
                   primary={item.name}
-                  secondary={formatCurrency(`${item.price}`, opts)}
+                  secondary={`Adet: ${item.quantity}  -  ${formatCurrency(
+                    `${item.price}`,
+                    opts
+                  )}`}
                   sx={{ pr: 8 }}
                 />
               </ListItem>

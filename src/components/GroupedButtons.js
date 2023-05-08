@@ -5,8 +5,9 @@ import CartContext from "../context/cart/CartContext";
 import { useContext } from "react";
 import AddIcon from "@mui/icons-material/Add";
 const GroupedButtons = () => {
-  const { removeItem } = useContext(CartContext);
+  const { removeItem, cartItems } = useContext(CartContext);
   const [count, setCount] = useState(1);
+
   const IncNum = () => {
     setCount(count + 1);
   };

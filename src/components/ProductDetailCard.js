@@ -1,50 +1,50 @@
 import React from "react";
+import "./ProductDetailCard.css";
+import CartContext from "../context/cart/CartContext";
+import { useContext } from "react";
+import Rating from "./Rating";
 
 const ProductDetailCard = ({ product }) => {
+  const { addToCart } = useContext(CartContext);
   return (
-    <div>
-      <div className="back_re">
-        <div className="container">
-          <div className="row">
-            <div className="col-md-12">
-              <div className="title">
-                <h2></h2>
-              </div>
-            </div>
+    <div class="container">
+      <div class="box">
+        <div class="images">
+          <div class="img-holder active">
+            <img src={product.image} />
+          </div>
+          <div class="img-holder">
+            <img src={product.image} />
+          </div>
+          <div class="img-holder">
+            <img src={product.image} />
+          </div>
+          <div class="img-holder">
+            <img src={product.image} />
           </div>
         </div>
-      </div>
-
-      <div className="MP-container">
-        <div className="MP-box">
-          <div className="MP-images">
-            <div className="MP-img-holder active">
-              <img src="images/paket1.png" />
-            </div>
+        <div class="basic-info">
+          <h1>{product.name}</h1>
+          <div className="ProductCard__Rateing">
+            <Rating value={product.rating} />
           </div>
-          <div className="MP-basic-info">
-            <h1>{product.name}</h1>
-            <div class="MP-rate">
-              <i className="filled fa fa-star"></i>
-              <i className="filled fa fa-star"></i>
-              <i className="filled fa fa-star"></i>
-              <i className="filled fa fa-star"></i>
-              <i className="filled fa fa-star"></i>
-            </div>
-            <span>$8.999</span>
+          <span>{product.price}TL</span>
+          <div class="options">
+            <button onClick={() => addToCart(product)}>
+              Add to Card
+            </button>
           </div>
-          <div className="MP-description">
-            <h3
-              style={{ fontSize: "16px", color: "black", fontWeight: "bolder" }}
-            >
-              Paket İçeriği
-            </h3>
-            <p></p>
-            <h3 style={{ fontSize: "16px", fontWeight: "bolder" }}>
-              Bir Günde Neleri Çalıştırır
-            </h3>
-            <p> ggfhgf</p>
-          </div>
+        </div>
+        <div class="description">
+          <p>
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Natus
+            temporibus corporis repudiandae, consectetur nostrum nisi commodi
+            placeat rerum molestias numquam nihil accusantium deleniti! Enim,
+            nesciunt a quis amet hic officia. Lorem ipsum dolor sit amet
+            consectetur adipisicing elit. Molestiae nemo accusantium tempora
+            facere doloremque cum iusto, ut neque, fuga omnis libero laborum
+            ullam. At dolorum qui atque labore illo dignissimos.
+          </p>
         </div>
       </div>
     </div>

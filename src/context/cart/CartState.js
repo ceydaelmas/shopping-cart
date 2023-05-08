@@ -23,6 +23,10 @@ const CartState = ({ children }) => {
     dispatch({ type: REMOVE_ITEM, payload: id });
   };
 
+  const getTotalItemCount = (items) => {
+    return items.reduce((total, item) => total + item.quantity, 0);
+  };
+
   return (
     <CartContext.Provider
       value={{
@@ -31,6 +35,7 @@ const CartState = ({ children }) => {
         addToCart,
         showHideCart,
         removeItem,
+        getTotalItemCount,
       }}
     >
       {children}

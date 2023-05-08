@@ -132,7 +132,8 @@ export default function DashboardLayout() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
     React.useState<null | HTMLElement>(null);
-  const { cartItems, showHideCart, showCart } = useContext(CartContext);
+  const { cartItems, showHideCart, showCart, getTotalItemCount } =
+    useContext(CartContext);
   const theme = useTheme();
   const [open, setOpen] = React.useState(true);
   const [selectedIndex, setSelectedIndex] = React.useState(-1);
@@ -180,7 +181,7 @@ export default function DashboardLayout() {
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
             <StyledProfileMenu />
-            <Badge badgeContent={cartItems.length} color="error">
+            <Badge badgeContent={getTotalItemCount(cartItems)} color="error">
               {" "}
               <CartMenu />
             </Badge>

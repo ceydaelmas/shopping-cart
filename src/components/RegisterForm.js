@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React, { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
@@ -11,29 +10,13 @@ const RegisterForm = () => {
     firstName: "",
     lastName: "",
     userName: "",
-=======
-import React, { useState } from "react";
-import FormGroup from "@mui/material/FormGroup";
-import Box from "@mui/material/Box";
-import { Typography } from "@mui/material";
-import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
-
-const RegisterForm = () => {
-  const [inputs, setInputs] = useState({
-    name: "",
-    surname: "",
->>>>>>> 41c0205bb973e46085a38371dcb6bc2836dca24e
     email: "",
     password: "",
   });
 
-<<<<<<< HEAD
   const { register, loading, succeeded } = useAuth();
   const navigate = useNavigate();
 
-=======
->>>>>>> 41c0205bb973e46085a38371dcb6bc2836dca24e
   const handleChange = (e) => {
     setInputs((prevState) => ({
       ...prevState,
@@ -41,7 +24,6 @@ const RegisterForm = () => {
     }));
   };
 
-<<<<<<< HEAD
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -63,12 +45,6 @@ const RegisterForm = () => {
     }
   }, [loading, succeeded, navigate]);
 
-=======
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  };
-
->>>>>>> 41c0205bb973e46085a38371dcb6bc2836dca24e
   return (
     <div>
       <form onSubmit={handleSubmit}>
@@ -82,13 +58,8 @@ const RegisterForm = () => {
           borderRadius={4}
         >
           <TextField
-<<<<<<< HEAD
             name="firstName"
             value={inputs.firstName}
-=======
-            name="name"
-            value={inputs.name}
->>>>>>> 41c0205bb973e46085a38371dcb6bc2836dca24e
             margin="normal"
             type="text"
             id="outlined-basic"
@@ -98,13 +69,8 @@ const RegisterForm = () => {
           />
 
           <TextField
-<<<<<<< HEAD
             name="lastName"
             value={inputs.lastName}
-=======
-            name="surname"
-            value={inputs.surname}
->>>>>>> 41c0205bb973e46085a38371dcb6bc2836dca24e
             margin="normal"
             type="text"
             id="outlined-basic"
@@ -114,13 +80,8 @@ const RegisterForm = () => {
           />
 
           <TextField
-<<<<<<< HEAD
             name="userName"
             value={inputs.userName}
-=======
-            name="username"
-            value={inputs.username}
->>>>>>> 41c0205bb973e46085a38371dcb6bc2836dca24e
             margin="normal"
             type="text"
             id="outlined-basic"

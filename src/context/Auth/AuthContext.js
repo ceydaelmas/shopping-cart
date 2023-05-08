@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 
 const AuthContext = createContext();
 
@@ -11,6 +11,10 @@ export const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [loading, setLoading] = useState(false);
   const [succeeded, setSucceeded] = useState(false);
+
+  useEffect(() => {
+    console.log(succeeded);
+  }, [succeeded]);
 
   const register = async (firstName, lastName, userName, email, password) => {
     setLoading(true);
@@ -35,13 +39,13 @@ export const AuthProvider = ({ children }) => {
       if (!response.ok) {
         throw new Error("Registration failed.");
       }
-
       const data = await response.json();
-      setSucceeded(data.succeeded); // 'succeeded' değerini ayarlayın
-      console.log("Registration successful:", data);
+      setSucceeded(data.succeeded);
+      console.log(data);
+      console.log(data.data.userId);
     } catch (error) {
       console.error("Registration error:", error);
-      setSucceeded(false); // Başarısızlık durumunda 'succeeded' değerini false yapın
+      setSucceeded(false);
       throw error;
     } finally {
       setLoading(false);

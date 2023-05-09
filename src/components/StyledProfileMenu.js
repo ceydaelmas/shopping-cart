@@ -76,63 +76,109 @@ export default function StyledProfileMenu() {
 
   return (
     <div>
-      {user ? (
-        <Button
-          id="demo-customized-button"
-          aria-controls={open ? "demo-customized-menu" : undefined}
-          aria-haspopup="true"
-          aria-expanded={open ? "true" : undefined}
-          variant="contained"
-          disableElevation
-          onClick={handleClick}
-          startIcon={<PersonOutlineOutlinedIcon sx={{ fontSize: "large" }} />}
-          sx={{
-            color: "white",
-            backgroundColor: "primary.main",
-            textTransform: "none",
-          }}
-        >
-          Profilim
-        </Button>
-      ) : (
-        <Button>Giriş</Button>
-      )}
-      <StyledMenu
-        id="demo-customized-menu"
-        MenuListProps={{
-          "aria-labelledby": "demo-customized-button",
+      <Button
+        id="demo-customized-button"
+        aria-controls={open ? "demo-customized-menu" : undefined}
+        aria-haspopup="true"
+        aria-expanded={open ? "true" : undefined}
+        variant="contained"
+        disableElevation
+        onClick={handleClick}
+        startIcon={<PersonOutlineOutlinedIcon sx={{ fontSize: "large" }} />}
+        sx={{
+          color: "white",
+          backgroundColor: "primary.main",
+          textTransform: "none",
         }}
-        anchorEl={anchorEl}
-        open={open}
-        onClose={handleClose}
       >
-        <Typography variant="span" gutterBottom>
-          <div style={{ padding: "4px 16px" }}>Ceyda Elmas</div>
-        </Typography>
-        <Divider sx={{ my: 0.5 }} />
-        <Link
-          to="/coupon-list"
-          style={{
-            cursor: "pointer",
-            textDecoration: "none",
-            color: "inherit",
-          }}
-        >
-          <MenuItem onClick={handleClose} disableRipple>
-            <DiscountOutlinedIcon />
-            İndirim Kuponlarım
-          </MenuItem>
-        </Link>
+        {user ? "Profilim" : "Giriş yap"}
+      </Button>
 
-        <MenuItem onClick={handleClose} disableRipple>
-          <PersonOutlineOutlinedIcon />
-          Kullanıcı Bilgilerim
-        </MenuItem>
-        <MenuItem onClick={handleClose} disableRipple>
-          <LogoutOutlinedIcon />
-          Çıkış yap
-        </MenuItem>
-      </StyledMenu>
+      {user ? (
+        <StyledMenu
+          id="demo-customized-menu"
+          MenuListProps={{
+            "aria-labelledby": "demo-customized-button",
+          }}
+          anchorEl={anchorEl}
+          open={open}
+          onClose={handleClose}
+        >
+          <Typography variant="span" gutterBottom sx={{ fontWeight: "bold" }}>
+            <div style={{ padding: "4px 16px", fontWeight: "bold" }}>
+              {user?.data?.firstName} {user?.data?.lastName}
+            </div>
+          </Typography>
+          <Divider sx={{ my: 0.5 }} />
+          <Link
+            to="/coupon-list"
+            style={{
+              cursor: "pointer",
+              textDecoration: "none",
+              color: "inherit",
+            }}
+          >
+            <MenuItem onClick={handleClose} disableRipple>
+              <DiscountOutlinedIcon />
+              İndirim Kuponlarım
+            </MenuItem>
+          </Link>
+
+          <MenuItem onClick={handleClose} disableRipple>
+            <PersonOutlineOutlinedIcon />
+            Kullanıcı Bilgilerim
+          </MenuItem>
+          <MenuItem onClick={handleClose} disableRipple>
+            <LogoutOutlinedIcon />
+            Çıkış yap
+          </MenuItem>
+        </StyledMenu>
+      ) : (
+        <StyledMenu
+          id="demo-customized-menu"
+          MenuListProps={{
+            "aria-labelledby": "demo-customized-button",
+          }}
+          anchorEl={anchorEl}
+          open={open}
+          onClose={handleClose}
+        >
+          <Link
+            to="/login-register"
+            style={{
+              cursor: "pointer",
+              textDecoration: "none",
+              color: "inherit",
+            }}
+          >
+            <Button
+              onClick={handleClose}
+              variant="contained"
+              sx={{
+                mt: 2,
+                ml: 4.8,
+              }}
+            >
+              {" "}
+              Giriş Yap
+            </Button>
+            <br />
+
+            <Button
+              onClick={handleClose}
+              variant="outlined"
+              sx={{
+                mt: 2,
+                ml: 4.8,
+                mb: 2,
+                width: 104,
+              }}
+            >
+              Üye Ol
+            </Button>
+          </Link>
+        </StyledMenu>
+      )}
     </div>
   );
 }

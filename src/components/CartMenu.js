@@ -137,12 +137,12 @@ export default function CartMenu() {
                   }
                 >
                   <ListItemAvatar>
-                    <Avatar src={item.image} />
+                    <Avatar src={item.imageUrl} />
                   </ListItemAvatar>
 
                   <ListItemText
-                    primary={item.productCount}
-                    secondary={`Adet: ${item.quantity}  -  ${formatCurrency(
+                    primary={item.name}
+                    secondary={`Adet: ${item.productCount}  -  ${formatCurrency(
                       `${item.price}`,
                       opts
                     )}`}

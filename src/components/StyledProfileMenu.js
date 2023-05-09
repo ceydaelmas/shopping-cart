@@ -12,6 +12,7 @@ import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { Typography } from "@mui/material";
 import { Link } from "react-router-dom";
+import { useAuth } from "../context/Auth/AuthContext";
 
 const StyledMenu = styled((props) => (
   <Menu
@@ -61,7 +62,11 @@ const StyledMenu = styled((props) => (
 
 export default function StyledProfileMenu() {
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const { user } = useAuth();
   const open = Boolean(anchorEl);
+  React.useEffect(() => {
+    console.log("user", user);
+  }, [user]);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -71,23 +76,27 @@ export default function StyledProfileMenu() {
 
   return (
     <div>
-      <Button
-        id="demo-customized-button"
-        aria-controls={open ? "demo-customized-menu" : undefined}
-        aria-haspopup="true"
-        aria-expanded={open ? "true" : undefined}
-        variant="contained"
-        disableElevation
-        onClick={handleClick}
-        startIcon={<PersonOutlineOutlinedIcon sx={{ fontSize: "large" }} />}
-        sx={{
-          color: "white",
-          backgroundColor: "primary.main",
-          textTransform: "none",
-        }}
-      >
-        Profilim
-      </Button>
+      {user ? (
+        <Button
+          id="demo-customized-button"
+          aria-controls={open ? "demo-customized-menu" : undefined}
+          aria-haspopup="true"
+          aria-expanded={open ? "true" : undefined}
+          variant="contained"
+          disableElevation
+          onClick={handleClick}
+          startIcon={<PersonOutlineOutlinedIcon sx={{ fontSize: "large" }} />}
+          sx={{
+            color: "white",
+            backgroundColor: "primary.main",
+            textTransform: "none",
+          }}
+        >
+          Profilim
+        </Button>
+      ) : (
+        <Button>Giriş</Button>
+      )}
       <StyledMenu
         id="demo-customized-menu"
         MenuListProps={{

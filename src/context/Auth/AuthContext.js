@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import { BASE_URL } from "../../config";
+import jwt_decode from "jwt-decode";
 
 const AuthContext = createContext();
 
@@ -21,7 +22,12 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     let token = localStorage.getItem("jwt");
-    if (token) setToken(token);
+    console.log("useEffect", token);
+    if (token) {
+      setToken(token);
+      var decoded = jwt_decode(token);
+      setUser(decoded);
+    }
   }, []);
 
   const register = async (firstName, lastName, userName, email, password) => {
@@ -94,7 +100,8 @@ export const AuthProvider = ({ children }) => {
   };
 
   const authorizedFetch = async (url, options = {}) => {
-    if (!token) {
+    let localToken = localStorage.getItem("jwt");
+    if (!localToken) {
       throw new Error("Token is not set");
     }
 
@@ -102,7 +109,7 @@ export const AuthProvider = ({ children }) => {
       ...options,
       headers: {
         ...options.headers,
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${localToken}`,
       },
     });
   };

@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { BASE_URL } from "../../config";
 import { useAuth } from "../Auth/AuthContext";
 
@@ -9,8 +9,14 @@ export const useShoppingCart = () => {
 };
 
 export const ShoppingCartProvider = ({ children }) => {
-  const [shoppingCart, setShoppingCart] = useState([]);
+  const [shoppingCart, setShoppingCart] = useState({
+    items: [],
+    totalShoppingCart: 0,
+  });
   const { authorizedFetch } = useAuth(); // authorizedFetch'i alın
+  useEffect(() => {
+    getShoppingCartItems();
+  }, []);
 
   const addItemToShoppingCart = async (productId) => {
     try {
@@ -29,34 +35,36 @@ export const ShoppingCartProvider = ({ children }) => {
       }
 
       const data = await response.json();
-      setShoppingCart(data);
-      console.log(shoppingCart);
+
+      setShoppingCart({
+        ...shoppingCart,
+        items: [...shoppingCart.items, data],
+      });
     } catch (error) {
       console.error("Error adding item to shopping cart:", error);
     }
   };
 
-  const getShoppingCartItems = async (userId) => {
-    try {
-      const response = await authorizedFetch(
-        `${BASE_URL}api/ShoppingCart/get-all-shopping-cart-items?UserId=${userId}`,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error("Error getting shopping cart items.");
+  const getShoppingCartItems = async () => {
+    console.log("GİRDİ");
+    const response = await authorizedFetch(
+      `${BASE_URL}api/ShoppingCart/get-all-shopping-cart-items`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
       }
+    ).catch((e) => console.log(e));
 
-      const data = await response.json();
-      setShoppingCart(data);
-      console.log(shoppingCart);
-    } catch (error) {
-      console.error("Error getting shopping cart items:", error);
+    if (!response.ok) {
+      throw new Error("Error getting shopping cart items.");
     }
+
+    const data = await response.json();
+    setShoppingCart(data);
+    console.log("data:   ", data);
   };
 
   const value = {

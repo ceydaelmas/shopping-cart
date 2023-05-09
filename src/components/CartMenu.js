@@ -14,8 +14,9 @@ import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined
 import { Link } from "react-router-dom";
 import formatCurrency from "format-currency";
 import CartContext from "../context/cart/CartContext";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { Typography } from "@mui/material";
+import { useShoppingCart } from "../context/ShoppingCart.js/ShoppingCartContext";
 
 const StyledMenu = styled((props) => (
   <Menu
@@ -64,8 +65,8 @@ const StyledMenu = styled((props) => (
 }));
 
 export default function CartMenu() {
+  const { shoppingCart, getShoppingCartItems } = useShoppingCart();
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const { cartItems, removeItem, getTotalItemCount } = useContext(CartContext);
 
   const open = Boolean(anchorEl);
   let opts = { format: "%v %s", symbol: "TL" };
@@ -76,6 +77,16 @@ export default function CartMenu() {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  useEffect(() => {
+    // Burada örnek olarak sabit bir user id kullanıyorum.
+    // Gerçek uygulamanızda giriş yapmış kullanıcının id'sini buraya eklemelisiniz.
+    console.log("sss");
+    getShoppingCartItems();
+  }, []);
+  useEffect(() => {
+    console.log("selamss", shoppingCart);
+  }, [shoppingCart]);
 
   return (
     <div>
@@ -106,47 +117,44 @@ export default function CartMenu() {
         onClose={handleClose}
       >
         <Typography variant="span" gutterBottom>
-          {cartItems.length !== 0 ? (
-            <div style={{ padding: "6px 16px 20px" }}>
-              Sepetim ({getTotalItemCount(cartItems)} ürün)
-            </div>
+          {shoppingCart?.items.length !== 0 ? (
+            <div style={{ padding: "6px 16px 20px" }}>Sepetim ( ürün)</div>
           ) : (
             <div style={{ padding: "8px 16px 16px", textAlign: "center" }}>
               Sepetinde ürün yok
             </div>
           )}
         </Typography>
-        {cartItems.map((item, index) => (
-          <React.Fragment key={index}>
-            <MenuItem onClick={handleClose} disableRipple>
-              <ListItem
-                secondaryAction={
-                  <IconButton edge="end" aria-label="delete">
-                    <DeleteOutlineOutlinedIcon
-                      onClick={() => removeItem(item._id)}
-                    />
-                  </IconButton>
-                }
-              >
-                <ListItemAvatar>
-                  <Avatar src={item.image} />
-                </ListItemAvatar>
+        {shoppingCart?.items.length !== 0 &&
+          shoppingCart?.items.map((item, index) => (
+            <React.Fragment key={index}>
+              <MenuItem onClick={handleClose} disableRipple>
+                <ListItem
+                  secondaryAction={
+                    <IconButton edge="end" aria-label="delete">
+                      <DeleteOutlineOutlinedIcon />
+                    </IconButton>
+                  }
+                >
+                  <ListItemAvatar>
+                    <Avatar src={item.image} />
+                  </ListItemAvatar>
 
-                <ListItemText
-                  primary={item.name}
-                  secondary={`Adet: ${item.quantity}  -  ${formatCurrency(
-                    `${item.price}`,
-                    opts
-                  )}`}
-                  sx={{ pr: 8 }}
-                />
-              </ListItem>
-            </MenuItem>
-            {index !== cartItems.length - 1 && <Divider />}
-          </React.Fragment>
-        ))}
+                  <ListItemText
+                    primary={item.productCount}
+                    secondary={`Adet: ${item.quantity}  -  ${formatCurrency(
+                      `${item.price}`,
+                      opts
+                    )}`}
+                    sx={{ pr: 8 }}
+                  />
+                </ListItem>
+              </MenuItem>
+              {index !== shoppingCart?.items.length - 1 && <Divider />}
+            </React.Fragment>
+          ))}
 
-        {cartItems.length !== 0 && (
+        {shoppingCart?.items.length !== 0 && (
           <>
             <Divider sx={{ my: 0.5 }} />
             <MenuItem

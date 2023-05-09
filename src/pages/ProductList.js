@@ -1,12 +1,14 @@
-// ProductList.js
-import { useContext } from "react";
 import { Typography, Divider } from "@mui/material";
 import ProductCard from "../components/ProductCard";
 import "./ProductList.css";
-import ProductContext from "../context/Product/ProductContext";
+import { useProducts } from "../context/Product/ProductContext";
 
 const ProductList = () => {
-  const { products } = useContext(ProductContext);
+  const { products, loading } = useProducts();
+
+  if (loading) {
+    return <p>Loading...</p>;
+  }
 
   return (
     <>
@@ -22,4 +24,5 @@ const ProductList = () => {
     </>
   );
 };
+
 export default ProductList;

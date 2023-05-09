@@ -12,10 +12,12 @@ import CartContext from "../context/cart/CartContext";
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { ProductContext, useProducts } from "../context/Product/ProductContext";
 
 const ProductCard = ({ product }) => {
   const { addToCart } = useContext(CartContext);
   const [isAddToCartVisible, setIsAddToCartVisible] = useState(false);
+  const { products, fetchProductById, loading } = useProducts();
 
   let opts = { format: "%v %s", symbol: "TL" };
   return (
@@ -26,7 +28,7 @@ const ProductCard = ({ product }) => {
       >
         <Link
           to={{
-            pathname: `/products/${product._id}`,
+            pathname: `/products/${product.id}`,
             state: { product: product },
           }}
           style={{
@@ -39,7 +41,7 @@ const ProductCard = ({ product }) => {
             <CardMedia
               component="img"
               height="290"
-              image={product.image}
+              image={product.imageUrl}
               alt={product.name}
             />
             <IconButton

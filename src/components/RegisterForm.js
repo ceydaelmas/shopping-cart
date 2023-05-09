@@ -1,39 +1,29 @@
-<<<<<<< HEAD
 import React, { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { useAuth } from "../context/Auth/AuthContext";
 import { useNavigate } from "react-router-dom";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} {...props} />;
+});
 
 const RegisterForm = () => {
   const [inputs, setInputs] = useState({
     firstName: "",
     lastName: "",
     userName: "",
-=======
-import React, { useState } from "react";
-import FormGroup from "@mui/material/FormGroup";
-import Box from "@mui/material/Box";
-import { Typography } from "@mui/material";
-import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
-
-const RegisterForm = () => {
-  const [inputs, setInputs] = useState({
-    name: "",
-    surname: "",
->>>>>>> 41c0205bb973e46085a38371dcb6bc2836dca24e
     email: "",
     password: "",
   });
 
-<<<<<<< HEAD
-  const { register, loading, succeeded } = useAuth();
+  const { register, loading, succeeded, set } = useAuth();
   const navigate = useNavigate();
+  const [open, setOpen] = useState(false);
 
-=======
->>>>>>> 41c0205bb973e46085a38371dcb6bc2836dca24e
   const handleChange = (e) => {
     setInputs((prevState) => ({
       ...prevState,
@@ -41,7 +31,6 @@ const RegisterForm = () => {
     }));
   };
 
-<<<<<<< HEAD
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -52,9 +41,26 @@ const RegisterForm = () => {
         inputs.email,
         inputs.password
       );
+      setInputs({
+        firstName: "",
+        lastName: "",
+        userName: "",
+        email: "",
+        password: "",
+      });
+      setOpen(true);
     } catch (error) {
       console.error("Registration error:", error);
+      setOpen(true);
     }
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
   };
 
   useEffect(() => {
@@ -63,12 +69,6 @@ const RegisterForm = () => {
     }
   }, [loading, succeeded, navigate]);
 
-=======
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  };
-
->>>>>>> 41c0205bb973e46085a38371dcb6bc2836dca24e
   return (
     <div>
       <form onSubmit={handleSubmit}>
@@ -82,13 +82,8 @@ const RegisterForm = () => {
           borderRadius={4}
         >
           <TextField
-<<<<<<< HEAD
             name="firstName"
             value={inputs.firstName}
-=======
-            name="name"
-            value={inputs.name}
->>>>>>> 41c0205bb973e46085a38371dcb6bc2836dca24e
             margin="normal"
             type="text"
             id="outlined-basic"
@@ -98,13 +93,8 @@ const RegisterForm = () => {
           />
 
           <TextField
-<<<<<<< HEAD
             name="lastName"
             value={inputs.lastName}
-=======
-            name="surname"
-            value={inputs.surname}
->>>>>>> 41c0205bb973e46085a38371dcb6bc2836dca24e
             margin="normal"
             type="text"
             id="outlined-basic"
@@ -114,13 +104,8 @@ const RegisterForm = () => {
           />
 
           <TextField
-<<<<<<< HEAD
             name="userName"
             value={inputs.userName}
-=======
-            name="username"
-            value={inputs.username}
->>>>>>> 41c0205bb973e46085a38371dcb6bc2836dca24e
             margin="normal"
             type="text"
             id="outlined-basic"
@@ -150,14 +135,32 @@ const RegisterForm = () => {
             variant="outlined"
             onChange={handleChange}
           />
-
           <Button
             type="submit"
             sx={{ marginTop: 3, borderRadius: 1 }}
             variant="contained"
           >
-            Kayıt Ol
+            Üye Ol
           </Button>
+          <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+            {succeeded ? (
+              <Alert
+                onClose={handleClose}
+                severity="success"
+                sx={{ width: "100%" }}
+              >
+                Kaydınız başarıyla oluşturuldu!
+              </Alert>
+            ) : (
+              <Alert
+                onClose={handleClose}
+                severity="error"
+                sx={{ width: "100%" }}
+              >
+                Kayıt oluşturulurken bir hata oluştu. Lütfen tekrar deneyin.
+              </Alert>
+            )}
+          </Snackbar>
         </Box>
       </form>
     </div>

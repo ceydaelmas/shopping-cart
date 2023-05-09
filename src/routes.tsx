@@ -6,6 +6,7 @@ import ProductList from "./pages/ProductList";
 import { Page404 } from "./pages/Page404";
 import Home from "./pages/HomeScreen";
 import AuthScreen from "./pages/AuthScreen";
+import CouponList from "./pages/CouponList";
 
 export const RouteList: React.FC = () => {
   return useRoutes([
@@ -29,10 +30,19 @@ export const RouteList: React.FC = () => {
           element: <ProductList />,
         },
         {
+          path: "/coupon-list",
+          element: <CouponList />,
+        },
+        {
           path: "/shopping-cart",
           element: <ShoppingCart />,
         },
         { path: "/login-register", element: <AuthScreen /> },
+
+        {
+          path: "/",
+          element: <Home />,
+        },
       ],
     },
   ]);

@@ -1,10 +1,13 @@
+// ProductList.js
+import { useContext } from "react";
 import { Typography, Divider } from "@mui/material";
 import ProductCard from "../components/ProductCard";
 import "./ProductList.css";
-import products from "../data";
-import Product from "./Product";
+import ProductContext from "../context/Product/ProductContext";
 
 const ProductList = () => {
+  const { products } = useContext(ProductContext);
+
   return (
     <>
       <Typography variant="h6" gutterBottom sx={{ mt: 1, ml: 6.5 }}>

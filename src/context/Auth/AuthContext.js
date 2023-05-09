@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, useEffect } from "react";
+import { BASE_URL } from "../../config";
 
 const AuthContext = createContext();
 
@@ -19,22 +20,19 @@ export const AuthProvider = ({ children }) => {
   const register = async (firstName, lastName, userName, email, password) => {
     setLoading(true);
     try {
-      const response = await fetch(
-        "https://6180-31-206-104-209.ngrok-free.app/api/Auth/register",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            firstName,
-            lastName,
-            userName,
-            email,
-            password,
-          }),
-        }
-      );
+      const response = await fetch(`${BASE_URL}api/Auth/register`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          firstName,
+          lastName,
+          userName,
+          email,
+          password,
+        }),
+      });
 
       if (!response.ok) {
         setSucceeded(false);
@@ -55,16 +53,13 @@ export const AuthProvider = ({ children }) => {
   const login = async (email, password) => {
     setLoading(true);
     try {
-      const response = await fetch(
-        "https://6180-31-206-104-209.ngrok-free.app/api/Auth/login",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ email, password }),
-        }
-      );
+      const response = await fetch(`${BASE_URL}api/Auth/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
 
       if (!response.ok) {
         throw new Error("Login failed.");

@@ -22,8 +22,8 @@ const ProductCard = ({ product }) => {
   const { addItemToShoppingCart } = useShoppingCart();
 
   const handleAddToCart = () => {
-    const userId = "user1223"; // Replace with the actual user ID
-    addItemToShoppingCart(userId, product.id);
+    // Replace with the actual user ID
+    addItemToShoppingCart(product.id);
   };
   let opts = { format: "%v %s", symbol: "TL" };
   return (

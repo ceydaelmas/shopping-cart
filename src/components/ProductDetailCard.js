@@ -3,6 +3,7 @@ import "./ProductDetailCard.css";
 import CartContext from "../context/cart/CartContext";
 import { useContext } from "react";
 import Rating from "./Rating";
+import { Button } from "@mui/material";
 
 const ProductDetailCard = ({ product }) => {
   const { addToCart } = useContext(CartContext);
@@ -20,10 +21,10 @@ const ProductDetailCard = ({ product }) => {
             <Rating value={product.rating} />
           </div>
           <span>{product.price}TL</span>
-          <div class="options">
-            <button onClick={() => addToCart(product)}>
-              Add to Card
-            </button>
+          <div style={{ marginBottom: 6 }}>
+            <Button variant="contained" onClick={() => addToCart(product)}>
+              Sepete Git
+            </Button>
           </div>
         </div>
         <div class="description">

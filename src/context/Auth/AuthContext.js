@@ -13,10 +13,16 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
   const [succeeded, setSucceeded] = useState(false);
   const [userId, setUserId] = useState(null);
+  const [token, setToken] = useState(null); // Token state'i ekleyin
 
   useEffect(() => {
     console.log(succeeded);
   }, [succeeded]);
+
+  useEffect(() => {
+    let token = localStorage.getItem("jwt");
+    if (token) setToken(token);
+  }, []);
 
   const register = async (firstName, lastName, userName, email, password) => {
     setLoading(true);
@@ -51,6 +57,7 @@ export const AuthProvider = ({ children }) => {
       setLoading(false);
     }
   };
+
   const login = async (email, password) => {
     setLoading(true);
     try {
@@ -68,6 +75,9 @@ export const AuthProvider = ({ children }) => {
 
       const data = await response.json();
       setUser(data);
+      setToken(data.data.token);
+      localStorage.setItem("jwt", data.data.token);
+      console.log(data.data.token);
       setIsLoggedIn(true);
       setSucceeded(data.succeeded);
       console.log(succeeded);
@@ -83,6 +93,20 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const authorizedFetch = async (url, options = {}) => {
+    if (!token) {
+      throw new Error("Token is not set");
+    }
+
+    return fetch(url, {
+      ...options,
+      headers: {
+        ...options.headers,
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  };
+
   const value = {
     user,
     login,
@@ -91,6 +115,7 @@ export const AuthProvider = ({ children }) => {
     loading,
     succeeded,
     userId,
+    authorizedFetch, // Bu satırı ekleyin
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

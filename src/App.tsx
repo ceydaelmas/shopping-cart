@@ -7,6 +7,7 @@ import {
 import { BrowserRouter } from "react-router-dom";
 import { RouteList } from "./routes";
 import Cart from "./components/Cart";
+import { useEffect } from "react";
 
 export const App = (): JSX.Element => {
   const theme = createTheme({

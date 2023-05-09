@@ -11,6 +11,7 @@ import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { Typography } from "@mui/material";
+import { Link } from "react-router-dom";
 
 const StyledMenu = styled((props) => (
   <Menu
@@ -78,7 +79,7 @@ export default function StyledProfileMenu() {
         variant="contained"
         disableElevation
         onClick={handleClick}
-        startIcon={<PersonOutlineOutlinedIcon sx={{ fontSize: 'large' }} />}
+        startIcon={<PersonOutlineOutlinedIcon sx={{ fontSize: "large" }} />}
         sx={{
           color: "white",
           backgroundColor: "primary.main",
@@ -100,10 +101,19 @@ export default function StyledProfileMenu() {
           <div style={{ padding: "4px 16px" }}>Ceyda Elmas</div>
         </Typography>
         <Divider sx={{ my: 0.5 }} />
-        <MenuItem onClick={handleClose} disableRipple>
-          <DiscountOutlinedIcon />
-          İndirim Kuponlarım
-        </MenuItem>
+        <Link
+          to="/coupon-list"
+          style={{
+            cursor: "pointer",
+            textDecoration: "none",
+            color: "inherit",
+          }}
+        >
+          <MenuItem onClick={handleClose} disableRipple>
+            <DiscountOutlinedIcon />
+            İndirim Kuponlarım
+          </MenuItem>
+        </Link>
 
         <MenuItem onClick={handleClose} disableRipple>
           <PersonOutlineOutlinedIcon />

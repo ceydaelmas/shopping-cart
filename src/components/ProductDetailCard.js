@@ -11,16 +11,7 @@ const ProductDetailCard = ({ product }) => {
       <div class="box">
         <div class="images">
           <div class="img-holder active">
-            <img src={product.image} />
-          </div>
-          <div class="img-holder">
-            <img src={product.image} />
-          </div>
-          <div class="img-holder">
-            <img src={product.image} />
-          </div>
-          <div class="img-holder">
-            <img src={product.image} />
+            <img src={product.imageUrl} />
           </div>
         </div>
         <div class="basic-info">

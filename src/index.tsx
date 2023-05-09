@@ -4,7 +4,7 @@ import App from "./App";
 import CartState from "./context/cart/CartState";
 import { AuthProvider } from "./context/Auth/AuthContext";
 import { ProductProvider } from "./context/Product/ProductContext";
-
+import { ShoppingCartProvider } from "./context/ShoppingCart.js/ShoppingCartContext";
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
@@ -13,7 +13,9 @@ root.render(
     <AuthProvider>
       <ProductProvider>
         <CartState>
-          <App />
+          <ShoppingCartProvider>
+            <App />
+          </ShoppingCartProvider>
         </CartState>
       </ProductProvider>
     </AuthProvider>

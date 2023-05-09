@@ -12,16 +12,13 @@ export const ProductProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
 
   const fetchProductData = () => {
-    fetch(
-      "https://0a78-31-206-104-209.ngrok-free.app/api/Product/get-all-products",
-      {
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-      }
-    )
+    fetch(`${BASE_URL}api/Product/get-all-products`, {
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+    })
       .then((response) => {
         return response.json();
       })
@@ -32,16 +29,13 @@ export const ProductProvider = ({ children }) => {
   };
 
   const fetchProductById = (productId) => {
-    return fetch(
-      `https://0a78-31-206-104-209.ngrok-free.app/api/Product/get-product-by-id?Id=${productId}`,
-      {
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-      }
-    )
+    return fetch(`${BASE_URL}api/Product/get-product-by-id?Id=${productId}`, {
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+    })
       .then((response) => {
         return response.json();
       })

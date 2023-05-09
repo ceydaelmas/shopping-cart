@@ -13,12 +13,18 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { ProductContext, useProducts } from "../context/Product/ProductContext";
+import { useShoppingCart } from "../context/ShoppingCart.js/ShoppingCartContext";
 
 const ProductCard = ({ product }) => {
   const { addToCart } = useContext(CartContext);
   const [isAddToCartVisible, setIsAddToCartVisible] = useState(false);
   const { products, fetchProductById, loading } = useProducts();
+  const { addItemToShoppingCart } = useShoppingCart();
 
+  const handleAddToCart = () => {
+    const userId = "user1223"; // Replace with the actual user ID
+    addItemToShoppingCart(userId, product.id);
+  };
   let opts = { format: "%v %s", symbol: "TL" };
   return (
     <Card sx={{ width: 250, height: 500 }}>
@@ -108,7 +114,7 @@ const ProductCard = ({ product }) => {
             size="large"
             color="primary"
             variant="contained"
-            onClick={() => addToCart(product)}
+            onClick={handleAddToCart}
           >
             Add to Cart
           </Button>

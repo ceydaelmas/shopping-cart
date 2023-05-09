@@ -12,6 +12,7 @@ export const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [loading, setLoading] = useState(false);
   const [succeeded, setSucceeded] = useState(false);
+  const [userId, setUserId] = useState(null);
 
   useEffect(() => {
     console.log(succeeded);
@@ -41,7 +42,7 @@ export const AuthProvider = ({ children }) => {
       const data = await response.json();
       setSucceeded(data.succeeded);
       console.log(data);
-      console.log(data.data.userId);
+      setUserId(data.data.userId);
     } catch (error) {
       console.error("Registration error:", error);
       setSucceeded(false);
@@ -89,6 +90,7 @@ export const AuthProvider = ({ children }) => {
     isLoggedIn,
     loading,
     succeeded,
+    userId,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

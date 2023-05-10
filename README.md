@@ -12,7 +12,11 @@ This project is an e-commerce application developed using React.js for the purpo
 
 # UI Recording
 
-https://www.youtube.com/watch?v=3Y1pMDOjJOo
+
+
+https://github.com/mustafablutt/shopping-cart/assets/79998344/d52ce308-ee55-4974-8bae-224675baf902
+
+
 
 
 

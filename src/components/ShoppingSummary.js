@@ -45,14 +45,23 @@ export default function ShoppingSummary() {
             İndirim Miktarı:{" "}
             {shoppingCart.totalShoppingCart > 50 &&
             appliedCoupon.couponId === "coupon1"
-              ? `${shoppingCart.totalShoppingCart}-${appliedCoupon.basketFinalValue} TL`
+              ? `${
+                  shoppingCart.totalShoppingCart -
+                  appliedCoupon.basketFinalValue
+                } TL`
               : shoppingCart.totalShoppingCart < 50 &&
                 appliedCoupon.couponId === "coupon1"
               ? "Lütfen Sepetinize Ürün Ekleyin."
               : appliedCoupon.couponId === "coupon2" ||
                 appliedCoupon.couponId === "coupon3"
-              ? `${shoppingCart.totalShoppingCart}-${appliedCoupon.basketFinalValue} TL`
-              : `${shoppingCart.totalShoppingCart}-${appliedCoupon.basketFinalValue} TL`}
+              ? `${
+                  shoppingCart.totalShoppingCart -
+                  appliedCoupon.basketFinalValue
+                } TL`
+              : `${
+                  shoppingCart.totalShoppingCart -
+                  appliedCoupon.basketFinalValue
+                } TL`}
           </Typography>
         )}
 

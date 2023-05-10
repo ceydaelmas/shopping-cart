@@ -1,12 +1,13 @@
 // CouponCard.js
 import React, { useState } from "react";
 import "./CouponCard.css";
+import { CouponContext, useCoupon } from "../context/Coupon/CouponContext";
 
 const CouponCard = ({ coupon }) => {
   const [buttonText, setButtonText] = useState("Copy Code");
 
   const copyCode = () => {
-    const cpnCode = coupon._id;
+    const cpnCode = coupon.couponId;
     navigator.clipboard.writeText(cpnCode);
     setButtonText("COPIED");
 
@@ -24,7 +25,7 @@ const CouponCard = ({ coupon }) => {
           {coupon.description}
         </h3>
         <div className="coupon-row">
-          <span id="cpnCode">{coupon._id}</span>
+          <span id="cpnCode">{coupon.couponId}</span>
           <span id="cpnBtn" onClick={copyCode}>
             {buttonText}
           </span>

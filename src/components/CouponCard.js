@@ -5,16 +5,16 @@ import { CouponContext, useCoupon } from "../context/Coupon/CouponContext";
 import CouponData from "../CouponData";
 
 const CouponCard = ({ coupon }) => {
-  const [buttonText, setButtonText] = useState("Copy Code");
+  const [buttonText, setButtonText] = useState("Kodu Kopyala");
   const couponData = CouponData.find((c) => c.id === coupon.couponId);
 
   const copyCode = () => {
     const cpnCode = coupon.couponId;
     navigator.clipboard.writeText(cpnCode);
-    setButtonText("COPIED");
+    setButtonText("Kopyalandı");
 
     setTimeout(() => {
-      setButtonText("Copy Code");
+      setButtonText("Kodu Kopyala");
     }, 3000);
   };
 

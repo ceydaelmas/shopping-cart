@@ -116,7 +116,7 @@ const ProductCard = ({ product }) => {
             variant="contained"
             onClick={handleAddToCart}
           >
-            Add to Cart
+            Sepete Ekle
           </Button>
         )}
       </CardActions>

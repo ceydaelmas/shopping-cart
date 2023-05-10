@@ -5,6 +5,7 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
+import { useShoppingCart } from "../context/ShoppingCart.js/ShoppingCartContext";
 
 const bull = (
   <Box
@@ -16,6 +17,7 @@ const bull = (
 );
 
 export default function ShoppingSummary() {
+  const { shoppingCart } = useShoppingCart();
   return (
     <Card sx={{ maxWidth: 275 }}>
       <CardContent>
@@ -23,14 +25,17 @@ export default function ShoppingSummary() {
           Sipariş Özeti
         </Typography>
         <Typography sx={{ mb: 1.5 }} color="text.secondary">
-          Ürünün Toplamı
+          Ürünün Toplamı: {shoppingCart.totalShoppingCart} TL
+        </Typography>
+        <Typography sx={{ mb: 1.5 }} color="text.secondary">
+          Kullanılan Kupon: bu
         </Typography>
         <Divider sx={{ my: 0.5 }} />
         <Typography
-          sx={{ mb: 0, mt: 2, textAlign: "right", fontWeight: "bold" }}
+          sx={{ mb: 0, mt: 2, textAlign: "left", fontWeight: "bold" }}
           color="text.primary"
         >
-          213 TL
+          {shoppingCart.totalShoppingCart} TL
         </Typography>
       </CardContent>
       <CardActions></CardActions>

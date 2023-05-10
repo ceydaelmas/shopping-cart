@@ -1,4 +1,5 @@
 import { Grid, Typography } from "@mui/material";
+import { Divider } from "@mui/material";
 import ShoppingCardDetail from "../components/ShoppingCardDetail";
 import ShoppingSummary from "../components/ShoppingSummary";
 import Button from "@mui/material/Button";
@@ -7,7 +8,8 @@ import { useContext, useEffect } from "react";
 import { useShoppingCart } from "../context/ShoppingCart.js/ShoppingCartContext";
 
 const ShoppingCart = () => {
-  const { shoppingCart, getShoppingCartItems } = useShoppingCart();
+  const { shoppingCart, getShoppingCartItems, getTotalItemCount } =
+    useShoppingCart();
   useEffect(() => {
     // Burada örnek olarak sabit bir user id kullanıyorum.
     // Gerçek uygulamanızda giriş yapmış kullanıcının id'sini buraya eklemelisiniz.
@@ -22,10 +24,11 @@ const ShoppingCart = () => {
     <>
       {shoppingCart?.items.length !== 0 && (
         <>
-          <Typography variant="h4" gutterBottom>
-            Sepetim
+          <Typography variant="h6" gutterBottom sx={{ mt: 1, ml: 6.5 }}>
+            Sepetim ({getTotalItemCount()} ürün)
           </Typography>
-          <Grid container spacing={60} sx={{ alignItems: "flex-start" }}>
+          <Divider sx={{ mt: 2, mb: 5, ml: 6.5, mr: 10 }} />
+          <Grid container spacing={60} sx={{ ml: -52, mr: 10 }}>
             <Grid item xs={12} sm={6}>
               <ShoppingCardDetail />
             </Grid>

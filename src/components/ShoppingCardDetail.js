@@ -20,7 +20,7 @@ export default function ShoppingCardDetail() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const { quantity, cartItems, removeItem } = useContext(CartContext);
-  let opts = { format: "%s%v", symbol: "€" };
+  let opts = { format: "%v %s", symbol: "TL" };
 
   useEffect(() => {
     // Burada örnek olarak sabit bir user id kullanıyorum.

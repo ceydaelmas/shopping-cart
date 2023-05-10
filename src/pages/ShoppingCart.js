@@ -1,12 +1,11 @@
 import { Grid, Typography } from "@mui/material";
 import { Divider } from "@mui/material";
-import ShoppingCardDetail from "../components/ShoppingCardDetail";
-import ShoppingSummary from "../components/ShoppingSummary";
+import ShoppingCardDetail from "../components/ShoppingCart/ShoppingCardDetail";
+import ShoppingSummary from "../components/ShoppingCart/ShoppingSummary";
 import Button from "@mui/material/Button";
-import CartContext from "../context/cart/CartContext";
 import TextField from "@mui/material/TextField";
 import { useContext, useEffect, useState } from "react";
-import { useShoppingCart } from "../context/ShoppingCart.js/ShoppingCartContext";
+import { useShoppingCart } from "../context/ShoppingCart/ShoppingCartContext";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
@@ -25,7 +24,6 @@ const ShoppingCart = () => {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    console.log("sss");
     getShoppingCartItems();
   }, []);
 
@@ -35,7 +33,7 @@ const ShoppingCart = () => {
 
   const handleApplyCoupon = () => {
     applyCoupon(coupon);
-    console.log("hey", appliedCoupon); // TextField'ten alınan coupon id'yi applyCoupon fonksiyonuna gönderiyoruz.
+    //TextField'ten alınan coupon id'yi applyCoupon fonksiyonuna gönderiyoruz.
   };
 
   const handleClickOpen = () => {

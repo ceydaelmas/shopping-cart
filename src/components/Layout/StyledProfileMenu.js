@@ -3,16 +3,13 @@ import { styled, alpha } from "@mui/material/styles";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import EditIcon from "@mui/icons-material/Edit";
 import Divider from "@mui/material/Divider";
 import DiscountOutlinedIcon from "@mui/icons-material/DiscountOutlined";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
-import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { Typography } from "@mui/material";
 import { Link } from "react-router-dom";
-import { useAuth } from "../context/Auth/AuthContext";
+import { useAuth } from "../../context/Auth/AuthContext";
 
 const StyledMenu = styled((props) => (
   <Menu

@@ -2,6 +2,7 @@ import { createContext, useContext, useState, useEffect } from "react";
 import { BASE_URL } from "../../config";
 import jwt_decode from "jwt-decode";
 
+//Kullanıcı için Api işlemleri burda yapılır. Context Api burda yapılır.
 const AuthContext = createContext();
 
 export const useAuth = () => {
@@ -17,9 +18,7 @@ export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(null);
   const [decode, setDecode] = useState(null); // Token state'i ekleyin
 
-  useEffect(() => {
-    console.log(succeeded);
-  }, [succeeded]);
+  useEffect(() => {}, [succeeded]);
 
   useEffect(() => {
     let token = localStorage.getItem("jwt");
@@ -29,10 +28,10 @@ export const AuthProvider = ({ children }) => {
       var decoded = jwt_decode(token);
       setUser(decoded);
       setDecode(decoded);
-      console.log("decoded", decoded);
     }
   }, []);
 
+  //bu verileri mongo dbye post ediyoruz.
   const register = async (firstName, lastName, userName, email, password) => {
     setLoading(true);
     try {
@@ -56,7 +55,6 @@ export const AuthProvider = ({ children }) => {
       }
       const data = await response.json();
       setSucceeded(data.succeeded);
-      console.log(data);
       setUserId(data.data.userId);
     } catch (error) {
       console.error("Registration error:", error);
@@ -71,6 +69,8 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem("jwt");
     setUser(null);
   };
+
+  //bu verileri mongo dbye post ediyoruz.
   const login = async (email, password) => {
     setLoading(true);
     try {

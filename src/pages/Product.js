@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Typography } from "@mui/material";
 import { useLocation } from "react-router-dom";
-import ProductDetailCard from "../components/ProductDetailCard";
+import ProductDetailCard from "../components/Product/ProductDetailCard";
 import { ProductContext, useProducts } from "../context/Product/ProductContext";
 
 const Product = () => {

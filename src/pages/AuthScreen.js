@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import LoginForm from "./LoginForm";
-import RegisterForm from "../components/RegisterForm";
+import LoginForm from "../components/Auth/LoginForm";
+import RegisterForm from "../components/Auth/RegisterForm";
 import { Typography } from "@mui/material";
 
+//kullanıcı login register yaptığı page.
 const AuthScreen = () => {
   const [isLoginForm, setIsLoginForm] = useState(true);
 

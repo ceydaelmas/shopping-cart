@@ -7,14 +7,14 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import formatCurrency from "format-currency";
-import CartContext from "../context/cart/CartContext";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import IconButton from "@mui/material/IconButton";
 import { CardActionArea } from "@mui/material";
-import { useShoppingCart } from "../context/ShoppingCart.js/ShoppingCartContext";
-import GroupedButtons from "./GroupedButtons";
+import { useShoppingCart } from "../../context/ShoppingCart/ShoppingCartContext";
+import GroupedButtons from "../Product/GroupedButtons";
 import { useContext, useEffect } from "react";
 
+//kullanıcı sepete git butonuna basınca orda gördüğü card'lar bunlar.
 export default function ShoppingCardDetail() {
   const {
     shoppingCart,
@@ -23,18 +23,12 @@ export default function ShoppingCardDetail() {
   } = useShoppingCart();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-  const { quantity, cartItems, removeItem } = useContext(CartContext);
   let opts = { format: "%v %s", symbol: "TL" };
 
   useEffect(() => {
-    // Burada örnek olarak sabit bir user id kullanıyorum.
-    // Gerçek uygulamanızda giriş yapmış kullanıcının id'sini buraya eklemelisiniz.
-    console.log("sss");
     getShoppingCartItems();
   }, []);
-  useEffect(() => {
-    console.log("DİĞER SHOPPING CART", shoppingCart);
-  }, [shoppingCart]);
+  useEffect(() => {}, [shoppingCart]);
 
   return (
     <>

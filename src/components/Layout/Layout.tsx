@@ -19,24 +19,12 @@ import * as React from "react";
 import { Link, Outlet } from "react-router-dom";
 import { alpha } from "@mui/material/styles";
 import InputBase from "@mui/material/InputBase";
-import MenuItem from "@mui/material/MenuItem";
-import Menu from "@mui/material/Menu";
 import Badge from "@mui/material/Badge/Badge";
 import SearchIcon from "@mui/icons-material/Search";
-import { useState } from "react";
-import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import StyledProfileMenu from "./StyledProfileMenu";
-import PermIdentityIcon from "@mui/icons-material/PermIdentity";
-import PersonIcon from "@mui/icons-material/Person";
-import CartMenu from "./CartMenu";
-import { useShoppingCart } from "../context/ShoppingCart.js/ShoppingCartContext";
-
-import { Typography } from "@mui/material";
-
-import CartContext from "../context/cart/CartContext";
-import { useContext } from "react";
-import "./ProductCard.css";
+import CartMenu from "../ShoppingCart/CartMenu";
+import { useShoppingCart } from "../../context/ShoppingCart/ShoppingCartContext";
+import "../../style/Product/ProductCard.css";
 
 const drawerWidth = 240;
 
@@ -129,6 +117,7 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   justifyContent: "flex-end",
 }));
 
+//material ui'dan çekilen styleların bulunduğu ve navbarı ve soldaki routerı düzenlediğimiz yer
 export default function DashboardLayout() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
@@ -142,6 +131,7 @@ export default function DashboardLayout() {
     setSelectedIndex(index);
   };
 
+  //bu method ile badge kısmında sepetteki ürün sayısını gösterebiliyoruz. Shopping context'ten çekilmiştir.
   const { getTotalItemCount } = useShoppingCart();
 
   const handleDrawerOpen = () => {

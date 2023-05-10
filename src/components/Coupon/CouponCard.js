@@ -1,13 +1,14 @@
 // CouponCard.js
 import React, { useState } from "react";
-import "./CouponCard.css";
-import { CouponContext, useCoupon } from "../context/Coupon/CouponContext";
-import CouponData from "../CouponData";
-
+import "../../style/Card/CouponCard.css";
+import { CouponContext, useCoupon } from "../../context/Coupon/CouponContext";
+import CouponData from "../../CouponData";
+//Kullanıcın indirim kuponlarım sekmesine girdiğinde çıkan kart görüntüsü.
 const CouponCard = ({ coupon }) => {
   const [buttonText, setButtonText] = useState("Kodu Kopyala");
   const couponData = CouponData.find((c) => c.id === coupon.couponId);
 
+  //kodu kopyalar.
   const copyCode = () => {
     const cpnCode = coupon.couponId;
     navigator.clipboard.writeText(cpnCode);

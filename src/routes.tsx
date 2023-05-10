@@ -1,5 +1,5 @@
 import { useRoutes } from "react-router-dom";
-import DashboardLayout from "./components/Layout";
+import DashboardLayout from "./components/Layout/Layout";
 import Product from "./pages/Product";
 import ShoppingCart from "./pages/ShoppingCart";
 import ProductList from "./pages/ProductList";

@@ -13,11 +13,9 @@ import IconButton from "@mui/material/IconButton";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import { Link } from "react-router-dom";
 import formatCurrency from "format-currency";
-import CartContext from "../context/cart/CartContext";
-import { useContext, useEffect } from "react";
+import { useEffect } from "react";
 import { Typography } from "@mui/material";
-import { useShoppingCart } from "../context/ShoppingCart.js/ShoppingCartContext";
-
+import { useShoppingCart } from "../../context/ShoppingCart/ShoppingCartContext";
 const StyledMenu = styled((props) => (
   <Menu
     elevation={0}
@@ -64,6 +62,7 @@ const StyledMenu = styled((props) => (
   },
 }));
 
+//kullanıcı yukardaki navbarda sepet iconuna bastığında açılır.
 export default function CartMenu() {
   const {
     shoppingCart,
@@ -84,14 +83,10 @@ export default function CartMenu() {
   };
 
   useEffect(() => {
-    // Burada örnek olarak sabit bir user id kullanıyorum.
-    // Gerçek uygulamanızda giriş yapmış kullanıcının id'sini buraya eklemelisiniz.
-    console.log("sss");
     getShoppingCartItems();
   }, []);
-  useEffect(() => {
-    console.log("selamss", shoppingCart);
-  }, [shoppingCart]);
+
+  useEffect(() => {}, [shoppingCart]);
 
   return (
     <div>

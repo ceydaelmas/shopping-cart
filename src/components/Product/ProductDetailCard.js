@@ -1,12 +1,11 @@
 import React from "react";
-import "./ProductDetailCard.css";
-import CartContext from "../context/cart/CartContext";
+import "../../style/Product/ProductDetailCard.css"
 import { useContext } from "react";
 import Rating from "./Rating";
 import { Button } from "@mui/material";
 
+//product detaylarının gözüktüğü kısım.
 const ProductDetailCard = ({ product }) => {
-  const { addToCart } = useContext(CartContext);
   return (
     <div class="container">
       <div class="box">
@@ -23,9 +22,7 @@ const ProductDetailCard = ({ product }) => {
           </div>
           <span>{product.price} TL</span>
           <div style={{ marginBottom: 6 }}>
-            <Button variant="contained" onClick={() => addToCart(product)}>
-              Sepete Git
-            </Button>
+            <Button variant="contained">Sepete Git</Button>
           </div>
         </div>
         <div class="description">

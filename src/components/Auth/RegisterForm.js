@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import { useAuth } from "../context/Auth/AuthContext";
+import { useAuth } from "../../context/Auth/AuthContext";
 import { useNavigate } from "react-router-dom";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
@@ -11,6 +11,7 @@ const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} {...props} />;
 });
 
+//kullanıcı giriş yapar.
 const RegisterForm = () => {
   const [inputs, setInputs] = useState({
     firstName: "",
@@ -20,7 +21,7 @@ const RegisterForm = () => {
     password: "",
   });
 
-  const { register, loading, succeeded, set } = useAuth();
+  const { register, loading, succeeded } = useAuth();
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
 
@@ -143,6 +144,7 @@ const RegisterForm = () => {
             Üye Ol
           </Button>
           <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+            {/* kayıt durumuna göre uyarı oluşturur. */}
             {succeeded ? (
               <Alert
                 onClose={handleClose}

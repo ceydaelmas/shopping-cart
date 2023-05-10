@@ -6,7 +6,7 @@ export const ProductContext = createContext();
 export const useProducts = () => {
   return useContext(ProductContext);
 };
-
+//burada product için Api işlemleri yapılır.
 export const ProductProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -24,7 +24,6 @@ export const ProductProvider = ({ children }) => {
       })
       .then((data) => {
         setProducts(data);
-        console.log(data);
       });
   };
 

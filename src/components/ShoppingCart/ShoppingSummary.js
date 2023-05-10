@@ -5,8 +5,7 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
-import { useShoppingCart } from "../context/ShoppingCart.js/ShoppingCartContext";
-
+import { useShoppingCart } from "../../context/ShoppingCart/ShoppingCartContext";
 const bull = (
   <Box
     component="span"
@@ -15,7 +14,7 @@ const bull = (
     •
   </Box>
 );
-
+//kullanıcı sepete gittiğinde sağ tarafta çıkan yoplam ücret veya indirimlerin görüldüğü sayfa.
 export default function ShoppingSummary() {
   const { shoppingCart, appliedCoupon } = useShoppingCart();
   return (

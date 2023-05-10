@@ -1,6 +1,6 @@
 import { Typography } from "@mui/material";
 import { Divider } from "@mui/material";
-import CouponCard from "../components/CouponCard";
+import CouponCard from "../components/Coupon/CouponCard";
 import coupons from "../CouponData";
 import { useCoupon } from "../context/Coupon/CouponContext";
 

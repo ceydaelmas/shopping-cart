@@ -4,7 +4,7 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
-import { useAuth } from "../context/Auth/AuthContext";
+import { useAuth } from "../../context/Auth/AuthContext";
 import { useNavigate } from "react-router-dom";
 
 const LoginForm = () => {

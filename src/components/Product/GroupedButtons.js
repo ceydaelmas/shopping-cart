@@ -2,7 +2,10 @@ import React, { useState, useEffect } from "react";
 import Button from "@mui/material/Button";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import AddIcon from "@mui/icons-material/Add";
-import { useShoppingCart } from "../context/ShoppingCart.js/ShoppingCartContext";
+import { useShoppingCart } from "../../context/ShoppingCart/ShoppingCartContext";
+
+// Sepetim ksımındaki ürünün miktarını arttırır veya azaltan butonların olduğu
+// ve bunların hem quantitysine göre hem de quantity totalına göre silmesini/eklemesini sağlar.
 
 const GroupedButtons = ({ id }) => {
   const {
@@ -16,10 +19,7 @@ const GroupedButtons = ({ id }) => {
     getShoppingCartItems();
   }, []);
 
-  useEffect(() => {
-    console.log("shoppingCart:", shoppingCart);
-    console.log("shoppingCart.items:", shoppingCart?.items);
-  }, [shoppingCart]);
+  useEffect(() => {}, [shoppingCart]);
 
   const newCart = shoppingCart?.items.find((items) => items.productId === id);
 

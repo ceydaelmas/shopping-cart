@@ -1,6 +1,6 @@
 import { Typography, Divider } from "@mui/material";
-import ProductCard from "../components/ProductCard";
-import "./ProductList.css";
+import ProductCard from "../components/Product/ProductCard";
+import "../style/Product/ProductList.css";
 import { useProducts } from "../context/Product/ProductContext";
 
 const ProductList = () => {

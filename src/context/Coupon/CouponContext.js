@@ -1,11 +1,13 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import { BASE_URL } from "../../config";
 
+
 export const CouponContext = createContext();
 
 export const useCoupon = () => {
   return useContext(CouponContext);
 };
+//burada kupon için Api işlemleri yapılır.
 export const CouponProvider = ({ children }) => {
   const [coupons, setCoupons] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -23,7 +25,6 @@ export const CouponProvider = ({ children }) => {
       })
       .then((data) => {
         setCoupons(data);
-        console.log(data);
       });
   };
 

@@ -19,7 +19,7 @@ export const ShoppingCartProvider = ({ children }) => {
     basketFinalValue: 0,
   });
 
-  const { authorizedFetch } = useAuth(); // authorizedFetch'i alın
+  const { authorizedFetch } = useAuth(); // authorizedFetch işlemi ile kullanıcı giriş yapmadan bazı işlemleri yapmasını engelliyruz.
   useEffect(() => {
     getShoppingCartItems();
   }, []);
@@ -117,8 +117,6 @@ export const ShoppingCartProvider = ({ children }) => {
       if (!response.ok) {
         throw new Error("Error applying coupon.");
       }
-
-      console.log(couponId);
       const responseText = await response.text();
       const parsedResponse = JSON.parse(responseText);
       setAppliedCoupon(parsedResponse);
@@ -148,7 +146,6 @@ export const ShoppingCartProvider = ({ children }) => {
 
     const data = await response.json();
     setShoppingCart(data);
-    console.log("data :   ", data);
   };
 
   const value = {

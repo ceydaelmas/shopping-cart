@@ -85,13 +85,9 @@ export const AuthProvider = ({ children }) => {
       const data = await response.json();
       setUser(data);
       setToken(data.data.token);
+      var decoded = jwt_decode(data.data.token); // Token'ı decode ediyoruz
+      setDecode(decoded); // ve decode edilmiş veriyi state'e kaydediyoruz
       localStorage.setItem("jwt", data.data.token);
-      console.log(data.data.token);
-      setIsLoggedIn(true);
-      setSucceeded(data.succeeded);
-      console.log(succeeded);
-      console.log(data);
-      console.log(data.data.userId);
     } catch (error) {
       console.error("Login error:", error);
       setIsLoggedIn(false);

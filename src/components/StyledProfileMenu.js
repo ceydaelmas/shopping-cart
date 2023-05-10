@@ -13,8 +13,6 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/Auth/AuthContext";
-import { useEffect, useState } from "react";
-import jwt_decode from "jwt-decode";
 
 const StyledMenu = styled((props) => (
   <Menu
@@ -64,11 +62,16 @@ const StyledMenu = styled((props) => (
 
 export default function StyledProfileMenu() {
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const { user } = useAuth();
-  const [token, setToken] = useState(null);
-  const [decode, setDecode] = useState(null);
+  const { user, decode } = useAuth();
+  const [email, setEmail] = React.useState("");
 
   const open = Boolean(anchorEl);
+  React.useEffect(() => {
+    if (decode && decode.email) {
+      setEmail(decode.email); // Eğer 'decode.email' varsa, 'email' state'ini güncelliyoruz
+    }
+  }, [decode]);
+
   React.useEffect(() => {
     console.log("user", user);
   }, [user]);
@@ -78,18 +81,6 @@ export default function StyledProfileMenu() {
   const handleClose = () => {
     setAnchorEl(null);
   };
-  var decoded;
-  useEffect(() => {
-    let token = localStorage.getItem("jwt");
-    console.log("useEffect", token);
-    if (token) {
-      setToken(token);
-      decoded = jwt_decode(token);
-
-      setDecode(decoded);
-      console.log("decoded", decoded);
-    }
-  }, []);
 
   return (
     <div>
@@ -123,7 +114,7 @@ export default function StyledProfileMenu() {
         >
           <Typography variant="span" gutterBottom sx={{ fontWeight: "bold" }}>
             <div style={{ padding: "4px 16px", fontWeight: "bold" }}>
-              {"YARIN DOLDURULACAK"}
+              {email ? email : "Email bilgisi yok"}
             </div>
           </Typography>
           <Divider sx={{ my: 0.5 }} />

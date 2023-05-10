@@ -83,11 +83,12 @@ export const AuthProvider = ({ children }) => {
       }
 
       const data = await response.json();
-      setUser(data);
-      setToken(data.data.token);
       var decoded = jwt_decode(data.data.token); // Token'ı decode ediyoruz
-      setDecode(decoded); // ve decode edilmiş veriyi state'e kaydediyoruz
+      setUser(decoded); // ve decode edilmiş veriyi state'e kaydediyoruz
+      setToken(data.data.token);
       localStorage.setItem("jwt", data.data.token);
+      setIsLoggedIn(true); // Kullanıcının oturum açtığını belirtiyoruz
+      setSucceeded(true); // Oturum açma işleminin başarılı olduğunu belirtiyoruz
     } catch (error) {
       console.error("Login error:", error);
       setIsLoggedIn(false);

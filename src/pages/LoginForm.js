@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
 import { useAuth } from "../context/Auth/AuthContext";
 import { useNavigate } from "react-router-dom";
 
@@ -10,14 +12,17 @@ const LoginForm = () => {
     email: "",
     password: "",
   });
-  const { login, loading, succeeded } = useAuth();
+  const [open, setOpen] = useState(false);
+  const { login, loading, succeeded, user } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!loading && succeeded) {
+    if (user) {
       navigate("/");
+    } else if (!loading && !succeeded) {
+      setOpen(true);
     }
-  }, [loading, succeeded, navigate]);
+  }, [user, navigate, loading, succeeded]);
 
   const handleChange = (e) => {
     setInputs((prevState) => ({
@@ -33,6 +38,14 @@ const LoginForm = () => {
     } catch (error) {
       console.error("Login error:", error);
     }
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
   };
 
   return (
@@ -76,6 +89,12 @@ const LoginForm = () => {
           </Button>
         </Box>
       </form>
+
+      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="error" sx={{ width: "100%" }}>
+          Giriş başarısız, lütfen kullanıcı adınızı ve şifrenizi kontrol ediniz.
+        </Alert>
+      </Snackbar>
     </div>
   );
 };

@@ -4,31 +4,43 @@ import ButtonGroup from "@mui/material/ButtonGroup";
 import CartContext from "../context/cart/CartContext";
 import { useContext } from "react";
 import AddIcon from "@mui/icons-material/Add";
+import { useShoppingCart } from "../context/ShoppingCart.js/ShoppingCartContext";
 
 const GroupedButtons = ({ id }) => {
+  const { shoppingCart, getShoppingCartItems, removeItemFromShoppingCart } =
+    useShoppingCart();
   const { removeItem, cartItems, addToCart, decreaseItem } =
     useContext(CartContext);
 
-  const cartItem = cartItems.find((item) => item._id === id);
+  useEffect(() => {
+    // Burada örnek olarak sabit bir user id kullanıyorum.
+    // Gerçek uygulamanızda giriş yapmış kullanıcının id'sini buraya eklemelisiniz.
 
-  const [count, setCount] = useState(cartItem ? cartItem.quantity : 1);
+    getShoppingCartItems();
+  }, []);
+  useEffect(() => {}, [shoppingCart]);
+
+  const newCart = shoppingCart.items.find((item) => item.productId === id);
+
+  const [count, setCount] = useState(newCart ? newCart.productCount : 1);
 
   useEffect(() => {
-    if (cartItem) {
-      setCount(cartItem.quantity);
+    if (newCart) {
+      setCount(newCart.productCount);
     }
-  }, [cartItem]);
+  }, [newCart]);
 
   const IncNum = () => {
-    if (cartItem) {
-      addToCart(cartItem);
+    if (newCart) {
+      addToCart(newCart);
     }
   };
 
-  const DecNum = () => {
+  const DecNum = async () => {
     if (count > 1) {
       setCount(count - 1);
-      decreaseItem(id); // Bu satırı güncelleyin
+      await removeItemFromShoppingCart(id);
+      getShoppingCartItems();
     } else {
       setCount(1);
       alert("min limit reached");

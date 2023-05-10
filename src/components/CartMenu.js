@@ -65,7 +65,8 @@ const StyledMenu = styled((props) => (
 }));
 
 export default function CartMenu() {
-  const { shoppingCart, getShoppingCartItems } = useShoppingCart();
+  const { shoppingCart, getShoppingCartItems, removeItemFromShoppingCart } =
+    useShoppingCart();
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const open = Boolean(anchorEl);
@@ -131,7 +132,14 @@ export default function CartMenu() {
               <MenuItem onClick={handleClose} disableRipple>
                 <ListItem
                   secondaryAction={
-                    <IconButton edge="end" aria-label="delete">
+                    <IconButton
+                      edge="end"
+                      aria-label="delete"
+                      onClick={async () => {
+                        await removeItemFromShoppingCart(item.productId);
+                        getShoppingCartItems();
+                      }}
+                    >
                       <DeleteOutlineOutlinedIcon />
                     </IconButton>
                   }

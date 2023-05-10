@@ -48,6 +48,29 @@ export const ShoppingCartProvider = ({ children }) => {
     }
   };
 
+  const removeItemFromShoppingCart = async (productId) => {
+    try {
+      const response = await authorizedFetch(
+        `${BASE_URL}api/ShoppingCart/remove-item-from-shopping-cart?productId=${productId}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Error removing item from shopping cart.");
+      }
+
+      // Sepeti güncelle
+      getShoppingCartItems();
+    } catch (error) {
+      console.error("Error removing item from shopping cart:", error);
+    }
+  };
+
   const getShoppingCartItems = async () => {
     console.log("GİRDİ");
     const response = await authorizedFetch(
@@ -73,6 +96,7 @@ export const ShoppingCartProvider = ({ children }) => {
   const value = {
     shoppingCart,
     addItemToShoppingCart,
+    removeItemFromShoppingCart,
     getShoppingCartItems,
   };
 

@@ -12,8 +12,7 @@ This project is an e-commerce application developed using React.js for the purpo
 
 # UI Recording
 
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/3Y1pMDOjJOo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+https://www.youtube.com/watch?v=3Y1pMDOjJOo
 
 
 

@@ -3,14 +3,24 @@ import ShoppingCardDetail from "../components/ShoppingCardDetail";
 import ShoppingSummary from "../components/ShoppingSummary";
 import Button from "@mui/material/Button";
 import CartContext from "../context/cart/CartContext";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
+import { useShoppingCart } from "../context/ShoppingCart.js/ShoppingCartContext";
 
 const ShoppingCart = () => {
-  const { cartItems } = useContext(CartContext);
+  const { shoppingCart, getShoppingCartItems } = useShoppingCart();
+  useEffect(() => {
+    // Burada örnek olarak sabit bir user id kullanıyorum.
+    // Gerçek uygulamanızda giriş yapmış kullanıcının id'sini buraya eklemelisiniz.
+    console.log("sss");
+    getShoppingCartItems();
+  }, []);
+  useEffect(() => {
+    console.log("DİĞER SHOPPING CART", shoppingCart);
+  }, [shoppingCart]);
 
   return (
     <>
-      {cartItems.length !== 0 && (
+      {shoppingCart?.items.length !== 0 && (
         <>
           <Typography variant="h4" gutterBottom>
             Sepetim

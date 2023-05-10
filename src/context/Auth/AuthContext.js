@@ -14,7 +14,8 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
   const [succeeded, setSucceeded] = useState(false);
   const [userId, setUserId] = useState(null);
-  const [token, setToken] = useState(null); // Token state'i ekleyin
+  const [token, setToken] = useState(null);
+  const [decode, setDecode] = useState(null); // Token state'i ekleyin
 
   useEffect(() => {
     console.log(succeeded);
@@ -27,6 +28,8 @@ export const AuthProvider = ({ children }) => {
       setToken(token);
       var decoded = jwt_decode(token);
       setUser(decoded);
+      setDecode(decoded);
+      console.log("decoded", decoded);
     }
   }, []);
 
@@ -121,6 +124,7 @@ export const AuthProvider = ({ children }) => {
     isLoggedIn,
     loading,
     succeeded,
+    decode,
     userId,
     authorizedFetch, // Bu satırı ekleyin
   };

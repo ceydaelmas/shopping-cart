@@ -40,6 +40,9 @@ export const ShoppingCartProvider = ({ children }) => {
         ...shoppingCart,
         items: [...shoppingCart.items, data],
       });
+
+      // Sepeti güncelle
+      getShoppingCartItems();
     } catch (error) {
       console.error("Error adding item to shopping cart:", error);
     }

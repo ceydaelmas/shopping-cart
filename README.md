@@ -130,28 +130,11 @@ Here's how you can run our project using Docker:
 ### Prerequisites
 -Install Docker on your machine.
 
-### Steps
-
-1. Clone the project
+Run Docker container
 
 ```bash
-  git clone https://github.com/mustafablutt/shopping-cart
-```
-2. Go to the project directory
+  docker run ceydaelmas/shoppingcart:lastone
 
-```bash
-   cd shopping-cart
-```
-
-3. Build Docker image
-
-```bash
-  docker build -t shopping-cart .
-```
-4. Run Docker container
-
-```bash
-  docker run -p 3000:3000 shopping-cart
 ```
 After these steps, you should be able to access the application at 'http://localhost:3000' .
 

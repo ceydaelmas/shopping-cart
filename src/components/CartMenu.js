@@ -69,6 +69,14 @@ export default function CartMenu() {
     useShoppingCart();
   const [anchorEl, setAnchorEl] = React.useState(null);
 
+  const getTotalItemCount = (items) => {
+    let total = 0;
+    for (let i = 0; i < items.length; i++) {
+      total += items[i].productCount;
+    }
+    return total;
+  };
+
   const open = Boolean(anchorEl);
   let opts = { format: "%v %s", symbol: "TL" };
 
@@ -119,7 +127,9 @@ export default function CartMenu() {
       >
         <Typography variant="span" gutterBottom>
           {shoppingCart?.items.length !== 0 ? (
-            <div style={{ padding: "6px 16px 20px" }}>Sepetim ( ürün)</div>
+            <div style={{ padding: "6px 16px 20px" }}>
+              Sepetim ({getTotalItemCount(shoppingCart.items)} ürün)
+            </div>
           ) : (
             <div style={{ padding: "8px 16px 16px", textAlign: "center" }}>
               Sepetinde ürün yok

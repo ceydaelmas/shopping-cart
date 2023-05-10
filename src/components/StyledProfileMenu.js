@@ -62,9 +62,8 @@ const StyledMenu = styled((props) => (
 
 export default function StyledProfileMenu() {
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const { user, decode } = useAuth();
+  const { user, decode, logout } = useAuth();
   const [email, setEmail] = React.useState("");
-
   const open = Boolean(anchorEl);
   React.useEffect(() => {
     if (decode && decode.email) {
@@ -136,10 +135,21 @@ export default function StyledProfileMenu() {
             <PersonOutlineOutlinedIcon />
             Kullanıcı Bilgilerim
           </MenuItem>
-          <MenuItem onClick={handleClose} disableRipple>
-            <LogoutOutlinedIcon />
-            Çıkış yap
-          </MenuItem>
+
+          <Link
+            to="/login-register"
+            style={{
+              cursor: "pointer",
+              textDecoration: "none",
+              color: "inherit",
+            }}
+            onClick={logout}
+          >
+            <MenuItem onClick={handleClose} disableRipple>
+              <LogoutOutlinedIcon />
+              Çıkış yap
+            </MenuItem>
+          </Link>
         </StyledMenu>
       ) : (
         <StyledMenu

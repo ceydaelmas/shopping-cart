@@ -67,6 +67,10 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const logout = () => {
+    localStorage.removeItem("jwt");
+    setUser(null);
+  };
   const login = async (email, password) => {
     setLoading(true);
     try {
@@ -123,6 +127,7 @@ export const AuthProvider = ({ children }) => {
     succeeded,
     decode,
     userId,
+    logout,
     authorizedFetch, // Bu satırı ekleyin
   };
 

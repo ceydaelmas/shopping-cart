@@ -13,8 +13,7 @@ This project is an e-commerce application developed using React.js for the purpo
 # UI Recording
 
 
-
-                                           Uploading WhatsApp Video 2023-05-10 at 22.57.40.mp4…
+<iframe width="560" height="315" src="https://www.youtube.com/embed/3Y1pMDOjJOo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 
 

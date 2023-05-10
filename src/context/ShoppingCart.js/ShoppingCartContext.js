@@ -13,10 +13,19 @@ export const ShoppingCartProvider = ({ children }) => {
     items: [],
     totalShoppingCart: 0,
   });
+
   const { authorizedFetch } = useAuth(); // authorizedFetch'i alın
   useEffect(() => {
     getShoppingCartItems();
   }, []);
+
+  const getTotalItemCount = (items) => {
+    let total = 0;
+    for (let i = 0; i < shoppingCart?.items?.length; i++) {
+      total += shoppingCart.items[i].productCount;
+    }
+    return total;
+  };
 
   const addItemToShoppingCart = async (productId) => {
     try {
@@ -33,13 +42,6 @@ export const ShoppingCartProvider = ({ children }) => {
       if (!response.ok) {
         throw new Error("Error adding item to shopping cart.");
       }
-
-      const data = await response.json();
-
-      setShoppingCart({
-        ...shoppingCart,
-        items: [...shoppingCart.items, data],
-      });
 
       // Sepeti güncelle
       getShoppingCartItems();
@@ -98,6 +100,7 @@ export const ShoppingCartProvider = ({ children }) => {
     addItemToShoppingCart,
     removeItemFromShoppingCart,
     getShoppingCartItems,
+    getTotalItemCount,
   };
 
   return (

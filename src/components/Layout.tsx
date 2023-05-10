@@ -30,6 +30,7 @@ import StyledProfileMenu from "./StyledProfileMenu";
 import PermIdentityIcon from "@mui/icons-material/PermIdentity";
 import PersonIcon from "@mui/icons-material/Person";
 import CartMenu from "./CartMenu";
+import { useShoppingCart } from "../context/ShoppingCart.js/ShoppingCartContext";
 
 import { Typography } from "@mui/material";
 
@@ -132,8 +133,7 @@ export default function DashboardLayout() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
     React.useState<null | HTMLElement>(null);
-  const { cartItems, showHideCart, showCart, getTotalItemCount } =
-    useContext(CartContext);
+
   const theme = useTheme();
   const [open, setOpen] = React.useState(true);
   const [selectedIndex, setSelectedIndex] = React.useState(-1);
@@ -141,6 +141,8 @@ export default function DashboardLayout() {
   const handleListItemClick = (_event: any, index: number) => {
     setSelectedIndex(index);
   };
+
+  const { getTotalItemCount } = useShoppingCart();
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -181,7 +183,7 @@ export default function DashboardLayout() {
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
             <StyledProfileMenu />
-            <Badge badgeContent={getTotalItemCount(cartItems)} color="error">
+            <Badge badgeContent={getTotalItemCount()} color="error">
               {" "}
               <CartMenu />
             </Badge>

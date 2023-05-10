@@ -65,17 +65,13 @@ const StyledMenu = styled((props) => (
 }));
 
 export default function CartMenu() {
-  const { shoppingCart, getShoppingCartItems, removeItemFromShoppingCart } =
-    useShoppingCart();
+  const {
+    shoppingCart,
+    getShoppingCartItems,
+    removeItemFromShoppingCart,
+    getTotalItemCount,
+  } = useShoppingCart();
   const [anchorEl, setAnchorEl] = React.useState(null);
-
-  const getTotalItemCount = (items) => {
-    let total = 0;
-    for (let i = 0; i < items.length; i++) {
-      total += items[i].productCount;
-    }
-    return total;
-  };
 
   const open = Boolean(anchorEl);
   let opts = { format: "%v %s", symbol: "TL" };

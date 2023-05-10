@@ -45,6 +45,7 @@
   display: flex;
   align-items: center;
   margin: 25px auto;
+  width: fit-content;
 }
 
 #cpnCode {

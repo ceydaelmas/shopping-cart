@@ -14,8 +14,13 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 
 const ShoppingCart = () => {
-  const { shoppingCart, getShoppingCartItems, getTotalItemCount, applyCoupon } =
-    useShoppingCart();
+  const {
+    shoppingCart,
+    getShoppingCartItems,
+    getTotalItemCount,
+    applyCoupon,
+    appliedCoupon,
+  } = useShoppingCart();
   const [coupon, setCoupon] = useState("");
   const [open, setOpen] = useState(false);
 
@@ -29,7 +34,8 @@ const ShoppingCart = () => {
   };
 
   const handleApplyCoupon = () => {
-    applyCoupon(coupon); // TextField'ten alınan coupon id'yi applyCoupon fonksiyonuna gönderiyoruz.
+    applyCoupon(coupon);
+    console.log("hey", appliedCoupon); // TextField'ten alınan coupon id'yi applyCoupon fonksiyonuna gönderiyoruz.
   };
 
   const handleClickOpen = () => {
@@ -85,7 +91,7 @@ const ShoppingCart = () => {
                 </DialogContent>
                 <DialogActions>
                   <Button onClick={handleClose}>Kapat</Button>
-                  <Button onClick={handleApplyCoupon}>Uygula</Button> 
+                  <Button onClick={handleApplyCoupon}>Uygula</Button>
                 </DialogActions>
               </Dialog>
               <br />

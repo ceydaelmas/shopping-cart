@@ -13,7 +13,11 @@ export const ShoppingCartProvider = ({ children }) => {
     items: [],
     totalShoppingCart: 0,
   });
-  const [appliedCoupon, setAppliedCoupon] = useState([]);
+  const [appliedCoupon, setAppliedCoupon] = useState({
+    basketTotalPrice: 0,
+    couponId: "",
+    basketFinalValue: 0,
+  });
 
   const { authorizedFetch } = useAuth(); // authorizedFetch'i alın
   useEffect(() => {
@@ -116,8 +120,8 @@ export const ShoppingCartProvider = ({ children }) => {
 
       console.log(couponId);
       const responseText = await response.text();
-      setAppliedCoupon(responseText);
-      console.log("bunedir", responseText);
+      const parsedResponse = JSON.parse(responseText);
+      setAppliedCoupon(parsedResponse);
       // Sepeti güncelle
       getShoppingCartItems();
     } catch (error) {

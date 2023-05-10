@@ -17,7 +17,7 @@ const bull = (
 );
 
 export default function ShoppingSummary() {
-  const { shoppingCart } = useShoppingCart();
+  const { shoppingCart, appliedCoupon } = useShoppingCart();
   return (
     <Card sx={{ maxWidth: 275 }}>
       <CardContent>
@@ -27,15 +27,31 @@ export default function ShoppingSummary() {
         <Typography sx={{ mb: 1.5 }} color="text.secondary">
           Ürünün Toplamı: {shoppingCart.totalShoppingCart} TL
         </Typography>
-        <Typography sx={{ mb: 1.5 }} color="text.secondary">
-          Kullanılan Kupon: bu
-        </Typography>
+        {appliedCoupon.basketTotalPrice !== 0 && (
+          <Typography sx={{ mb: 1.5 }} color="text.secondary">
+            Kullanılan Kupon: {appliedCoupon.couponId}
+          </Typography>
+        )}
+
+        {appliedCoupon.basketTotalPrice !== 0 && (
+          <Typography sx={{ mb: 1.5 }} color="text.secondary">
+            İndirim Miktarı: {appliedCoupon.basketFinalValue}
+          </Typography>
+        )}
+
         <Divider sx={{ my: 0.5 }} />
         <Typography
           sx={{ mb: 0, mt: 2, textAlign: "left", fontWeight: "bold" }}
           color="text.primary"
         >
-          {shoppingCart.totalShoppingCart} TL
+          <Typography
+            sx={{ mb: 0, mt: 2, textAlign: "left", fontWeight: "bold" }}
+            color="text.primary"
+          >
+            {appliedCoupon.basketTotalPrice !== 0
+              ? `${appliedCoupon.basketFinalValue} TL`
+              : `${shoppingCart.totalShoppingCart} TL`}
+          </Typography>
         </Typography>
       </CardContent>
       <CardActions></CardActions>

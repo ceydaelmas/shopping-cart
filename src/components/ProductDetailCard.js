@@ -17,10 +17,11 @@ const ProductDetailCard = ({ product }) => {
         </div>
         <div class="basic-info">
           <h1>{product.name}</h1>
+          <p>{product.description}</p>
           <div className="ProductCard__Rateing">
             <Rating value={product.rating} />
           </div>
-          <span>{product.price}TL</span>
+          <span>{product.price} TL</span>
           <div style={{ marginBottom: 6 }}>
             <Button variant="contained" onClick={() => addToCart(product)}>
               Sepete Git

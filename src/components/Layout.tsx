@@ -219,7 +219,7 @@ export default function DashboardLayout() {
             selected={selectedIndex === 1}
             onClick={(event) => handleListItemClick(event, 1)}
             component={Link}
-            to="/product-list"
+            to="/"
           >
             <ListItemIcon>
               <ListIcon />

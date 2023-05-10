@@ -20,9 +20,6 @@ const Product = () => {
 
   return (
     <>
-      <Typography variant="h4" gutterBottom>
-        Product
-      </Typography>
       {product && <ProductDetailCard product={product} />}
     </>
   );

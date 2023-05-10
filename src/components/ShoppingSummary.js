@@ -29,13 +29,30 @@ export default function ShoppingSummary() {
         </Typography>
         {appliedCoupon.basketTotalPrice !== 0 && (
           <Typography sx={{ mb: 1.5 }} color="text.secondary">
-            Kullanılan Kupon: {appliedCoupon.couponId}
+            Kullanılan Kupon:{" "}
+            {appliedCoupon.couponId === "coupon1"
+              ? "Merhaba50"
+              : appliedCoupon.couponId === "coupon2"
+              ? "Kış Sonu10"
+              : appliedCoupon.couponId === "coupon3"
+              ? "HoşGeldinYaz5"
+              : appliedCoupon.couponId}
           </Typography>
         )}
 
         {appliedCoupon.basketTotalPrice !== 0 && (
           <Typography sx={{ mb: 1.5 }} color="text.secondary">
-            İndirim Miktarı: {appliedCoupon.basketFinalValue}
+            İndirim Miktarı:{" "}
+            {shoppingCart.totalShoppingCart > 50 &&
+            appliedCoupon.couponId === "coupon1"
+              ? `${shoppingCart.totalShoppingCart}-${appliedCoupon.basketFinalValue} TL`
+              : shoppingCart.totalShoppingCart < 50 &&
+                appliedCoupon.couponId === "coupon1"
+              ? "Lütfen Sepetinize Ürün Ekleyin."
+              : appliedCoupon.couponId === "coupon2" ||
+                appliedCoupon.couponId === "coupon3"
+              ? `${shoppingCart.totalShoppingCart}-${appliedCoupon.basketFinalValue} TL`
+              : `${shoppingCart.totalShoppingCart}-${appliedCoupon.basketFinalValue} TL`}
           </Typography>
         )}
 
@@ -44,14 +61,16 @@ export default function ShoppingSummary() {
           sx={{ mb: 0, mt: 2, textAlign: "left", fontWeight: "bold" }}
           color="text.primary"
         >
-          <Typography
-            sx={{ mb: 0, mt: 2, textAlign: "left", fontWeight: "bold" }}
-            color="text.primary"
-          >
-            {appliedCoupon.basketTotalPrice !== 0
-              ? `${appliedCoupon.basketFinalValue} TL`
-              : `${shoppingCart.totalShoppingCart} TL`}
-          </Typography>
+          {shoppingCart.totalShoppingCart > 50 &&
+          appliedCoupon.couponId === "coupon1"
+            ? `${appliedCoupon.basketFinalValue} TL`
+            : shoppingCart.totalShoppingCart < 50 &&
+              appliedCoupon.couponId === "coupon1"
+            ? "Ürün tutarı indirim tutarından büyük olmalıdır."
+            : appliedCoupon.couponId === "coupon2" ||
+              appliedCoupon.couponId === "coupon3"
+            ? `${appliedCoupon.basketFinalValue} TL`
+            : `${shoppingCart.totalShoppingCart} TL`}
         </Typography>
       </CardContent>
       <CardActions></CardActions>

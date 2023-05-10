@@ -16,7 +16,11 @@ import GroupedButtons from "./GroupedButtons";
 import { useContext, useEffect } from "react";
 
 export default function ShoppingCardDetail() {
-  const { shoppingCart, getShoppingCartItems } = useShoppingCart();
+  const {
+    shoppingCart,
+    getShoppingCartItems,
+    removeItemFromShoppingCartCompeletely,
+  } = useShoppingCart();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const { quantity, cartItems, removeItem } = useContext(CartContext);
@@ -132,7 +136,9 @@ export default function ShoppingCardDetail() {
             >
               <IconButton edge="end" aria-label="delete">
                 <DeleteOutlineOutlinedIcon
-                  onClick={() => removeItem(item.productId)}
+                  onClick={() =>
+                    removeItemFromShoppingCartCompeletely(item.productId)
+                  }
                 />
               </IconButton>
             </Box>

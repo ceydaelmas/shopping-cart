@@ -68,7 +68,7 @@ export default function CartMenu() {
   const {
     shoppingCart,
     getShoppingCartItems,
-    removeItemFromShoppingCart,
+    removeItemFromShoppingCartCompeletely,
     getTotalItemCount,
   } = useShoppingCart();
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -142,7 +142,9 @@ export default function CartMenu() {
                       edge="end"
                       aria-label="delete"
                       onClick={async () => {
-                        await removeItemFromShoppingCart(item.productId);
+                        await removeItemFromShoppingCartCompeletely(
+                          item.productId
+                        );
                         getShoppingCartItems();
                       }}
                     >

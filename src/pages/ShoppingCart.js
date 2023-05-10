@@ -4,21 +4,41 @@ import ShoppingCardDetail from "../components/ShoppingCardDetail";
 import ShoppingSummary from "../components/ShoppingSummary";
 import Button from "@mui/material/Button";
 import CartContext from "../context/cart/CartContext";
-import { useContext, useEffect } from "react";
+import TextField from "@mui/material/TextField";
+import { useContext, useEffect, useState } from "react";
 import { useShoppingCart } from "../context/ShoppingCart.js/ShoppingCartContext";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
 
 const ShoppingCart = () => {
-  const { shoppingCart, getShoppingCartItems, getTotalItemCount } =
+  const { shoppingCart, getShoppingCartItems, getTotalItemCount, applyCoupon } =
     useShoppingCart();
+  const [coupon, setCoupon] = useState("");
+  const [open, setOpen] = useState(false);
+
   useEffect(() => {
-    // Burada örnek olarak sabit bir user id kullanıyorum.
-    // Gerçek uygulamanızda giriş yapmış kullanıcının id'sini buraya eklemelisiniz.
     console.log("sss");
     getShoppingCartItems();
   }, []);
-  useEffect(() => {
-    console.log("DİĞER SHOPPING CART", shoppingCart);
-  }, [shoppingCart]);
+
+  const handleChange = (e) => {
+    setCoupon(e.target.value);
+  };
+
+  const handleApplyCoupon = () => {
+    applyCoupon(coupon); // TextField'ten alınan coupon id'yi applyCoupon fonksiyonuna gönderiyoruz.
+  };
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   return (
     <>
@@ -34,14 +54,45 @@ const ShoppingCart = () => {
             </Grid>
             <Grid item xs={12} sm={6}>
               <ShoppingSummary />
+
               <br />
-              <Button variant="outlined" sx={{ minWidth: "275px" }}>
-                İndirim Kuponu Ekle
+              <br />
+              <Button
+                variant="outlined"
+                onClick={handleClickOpen}
+                sx={{ minWidth: "275px" }}
+              >
+                İNDİRİM Kuponu Ekle
               </Button>
+              <Dialog open={open} onClose={handleClose}>
+                <DialogTitle>Kupon Ekle</DialogTitle>
+                <DialogContent>
+                  <DialogContentText>
+                    İndirim kuponlarım'dan sana özel tanımlı kuponları
+                    görebilirsin.
+                  </DialogContentText>
+                  <TextField
+                    autoFocus
+                    margin="dense"
+                    id="name"
+                    label="Kupon Kodun"
+                    type="text"
+                    fullWidth
+                    variant="standard"
+                    value={coupon} // coupon state'ini TextField bileşeninin value özelliğine bağlıyoruz.
+                    onChange={handleChange} // coupon state'ini değiştirmek için handleChange fonksiyonunu kullanıyoruz.
+                  />
+                </DialogContent>
+                <DialogActions>
+                  <Button onClick={handleClose}>Kapat</Button>
+                  <Button onClick={handleApplyCoupon}>Uygula</Button> 
+                </DialogActions>
+              </Dialog>
               <br />
               <br />
+
               <Button variant="contained" sx={{ minWidth: "275px" }}>
-                Sepeti Onayla{" "}
+                Sepetİ Onayla{" "}
               </Button>
             </Grid>
           </Grid>

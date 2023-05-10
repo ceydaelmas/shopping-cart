@@ -13,6 +13,7 @@ export const ShoppingCartProvider = ({ children }) => {
     items: [],
     totalShoppingCart: 0,
   });
+  const [appliedCoupon, setAppliedCoupon] = useState([]);
 
   const { authorizedFetch } = useAuth(); // authorizedFetch'i alın
   useEffect(() => {
@@ -30,7 +31,7 @@ export const ShoppingCartProvider = ({ children }) => {
   const addItemToShoppingCart = async (productId) => {
     try {
       const response = await authorizedFetch(
-        `${BASE_URL}api/ShoppingCart/add-item-to-shopping-cart?productId=${productId}`,
+        `${BASE_URL}add-item-to-shopping-cart?productId=${productId}`,
         {
           method: "POST",
           headers: {
@@ -53,7 +54,7 @@ export const ShoppingCartProvider = ({ children }) => {
   const removeItemFromShoppingCart = async (productId) => {
     try {
       const response = await authorizedFetch(
-        `${BASE_URL}api/ShoppingCart/remove-item-from-shopping-cart?productId=${productId}`,
+        `${BASE_URL}decrease-item-amount-in-shopping-cart?productId=${productId}`,
         {
           method: "DELETE",
           headers: {
@@ -73,10 +74,61 @@ export const ShoppingCartProvider = ({ children }) => {
     }
   };
 
+  const removeItemFromShoppingCartCompeletely = async (productId) => {
+    try {
+      const response = await authorizedFetch(
+        `${BASE_URL}remove-item-from-shopping-cart-compeletely?productId=${productId}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Error removing item from shopping cart.");
+      }
+
+      // Sepeti güncelle
+      getShoppingCartItems();
+    } catch (error) {
+      console.error("Error removing item from shopping cart:", error);
+    }
+  };
+
+  const applyCoupon = async (couponId) => {
+    try {
+      const response = await authorizedFetch(
+        `${BASE_URL}apply-coupon?couponId=${couponId}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Error applying coupon.");
+      }
+
+      console.log(couponId);
+      const responseText = await response.text();
+      setAppliedCoupon(responseText);
+      console.log("bunedir", responseText);
+      // Sepeti güncelle
+      getShoppingCartItems();
+    } catch (error) {
+      console.error("Error applying coupon:", error);
+    }
+  };
+
   const getShoppingCartItems = async () => {
     console.log("GİRDİ");
     const response = await authorizedFetch(
-      `${BASE_URL}api/ShoppingCart/get-all-shopping-cart-items`,
+      `${BASE_URL}get-all-shopping-cart-items`,
       {
         method: "GET",
         headers: {
@@ -92,7 +144,7 @@ export const ShoppingCartProvider = ({ children }) => {
 
     const data = await response.json();
     setShoppingCart(data);
-    console.log("data:   ", data);
+    console.log("data :   ", data);
   };
 
   const value = {
@@ -101,6 +153,9 @@ export const ShoppingCartProvider = ({ children }) => {
     removeItemFromShoppingCart,
     getShoppingCartItems,
     getTotalItemCount,
+    applyCoupon,
+    appliedCoupon,
+    removeItemFromShoppingCartCompeletely,
   };
 
   return (

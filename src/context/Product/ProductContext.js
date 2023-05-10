@@ -12,7 +12,7 @@ export const ProductProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
 
   const fetchProductData = () => {
-    fetch(`${BASE_URL}api/Product/get-all-products`, {
+    fetch(`${BASE_URL}get-all-products`, {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
@@ -29,7 +29,7 @@ export const ProductProvider = ({ children }) => {
   };
 
   const fetchProductById = (productId) => {
-    return fetch(`${BASE_URL}api/Product/get-product-by-id?Id=${productId}`, {
+    return fetch(`${BASE_URL}get-product-by-id?Id=${productId}`, {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",

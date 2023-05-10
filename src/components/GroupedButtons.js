@@ -1,26 +1,27 @@
 import React, { useState, useEffect } from "react";
 import Button from "@mui/material/Button";
 import ButtonGroup from "@mui/material/ButtonGroup";
-import CartContext from "../context/cart/CartContext";
-import { useContext } from "react";
 import AddIcon from "@mui/icons-material/Add";
 import { useShoppingCart } from "../context/ShoppingCart.js/ShoppingCartContext";
 
 const GroupedButtons = ({ id }) => {
-  const { shoppingCart, getShoppingCartItems, removeItemFromShoppingCart } =
-    useShoppingCart();
-  const { removeItem, cartItems, addToCart, decreaseItem } =
-    useContext(CartContext);
+  const {
+    shoppingCart,
+    getShoppingCartItems,
+    addItemToShoppingCart,
+    removeItemFromShoppingCart,
+  } = useShoppingCart();
 
   useEffect(() => {
-    // Burada örnek olarak sabit bir user id kullanıyorum.
-    // Gerçek uygulamanızda giriş yapmış kullanıcının id'sini buraya eklemelisiniz.
-
     getShoppingCartItems();
   }, []);
-  useEffect(() => {}, [shoppingCart]);
 
-  const newCart = shoppingCart.items.find((item) => item.productId === id);
+  useEffect(() => {
+    console.log("shoppingCart:", shoppingCart);
+    console.log("shoppingCart.items:", shoppingCart?.items);
+  }, [shoppingCart]);
+
+  const newCart = shoppingCart?.items.find((items) => items.productId === id);
 
   const [count, setCount] = useState(newCart ? newCart.productCount : 1);
 
@@ -30,9 +31,10 @@ const GroupedButtons = ({ id }) => {
     }
   }, [newCart]);
 
-  const IncNum = () => {
+  const IncNum = async () => {
     if (newCart) {
-      addToCart(newCart);
+      await addItemToShoppingCart(id);
+      getShoppingCartItems();
     }
   };
 

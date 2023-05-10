@@ -98,7 +98,7 @@ export default function ShoppingCardDetail() {
                 paddingLeft: 10,
               }}
             >
-              <GroupedButtons id={item._id} />
+              <GroupedButtons id={item.productId} />
             </Box>
 
             <Box
@@ -117,7 +117,7 @@ export default function ShoppingCardDetail() {
                 component="div"
                 noWrap
               >
-                {formatCurrency(`${item.price}`, opts)}
+                {formatCurrency(`${item.price * item.productCount}`, opts)}
               </Typography>
             </Box>
             <Box
@@ -132,7 +132,7 @@ export default function ShoppingCardDetail() {
             >
               <IconButton edge="end" aria-label="delete">
                 <DeleteOutlineOutlinedIcon
-                  onClick={() => removeItem(item._id)}
+                  onClick={() => removeItem(item.productId)}
                 />
               </IconButton>
             </Box>

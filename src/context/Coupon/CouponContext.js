@@ -11,7 +11,7 @@ export const CouponProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
 
   const fetchCouponData = () => {
-    fetch(`${BASE_URL}api/CouponContoller/get-all-coupons`, {
+    fetch(`${BASE_URL}get-all-coupons`, {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",

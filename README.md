@@ -88,6 +88,8 @@ Throughout the development of this project, I deepened my understanding and skil
 
 ## Getting Started
 
+At present, the backend server is experiencing issues, causing the data to be inaccessible when running the project.
+
 1. Clone the project
 
 ```bash
